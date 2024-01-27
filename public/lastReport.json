@@ -1,0 +1,149 @@
+[
+  {
+    "handshake": {
+      "fileID": "informe26-01-24.json",
+      "tittle": "Cambio de Turno",
+      "party": [
+        {
+          "type": "Turno Entrante",
+          "leader": "Jefe entrante",
+          "number": "1"
+        },
+        {
+          "type": "Turno Saliente",
+          "leader": "Jefe saliente",
+          "number": "2"
+        }
+      ]
+    }
+  },
+  {
+    "blocksAreas": [
+      {
+        "areaName": "Seguridad",
+        "units": "ESTADO",
+        "urlImages": [
+          "http://localhost:3001//public/images/1706270053137_marineros.png",
+          "http://localhost:3001//public/images/1706271201000_Captura de pantalla 2023-03-16 125717.png",
+          "http://localhost:3001//public/images/1706271207397_Captura de pantalla 2023-04-21 171801.png",
+          "http://localhost:3001//public/images/1706271214427_Captura de pantalla 2023-04-25 135230.png",
+          "http://localhost:3001//public/images/1706271219701_Captura de pantalla 2023-04-10 162707.png",
+          "http://localhost:3001//public/images/1706271225157_Captura de pantalla 2023-03-16 125536.png",
+          "http://localhost:3001//public/images/1706271238236_Captura de pantalla 2023-04-25 164058.png",
+          "http://localhost:3001//public/images/1706271244577_Captura de pantalla 2023-04-08 144245.png",
+          "http://localhost:3001//public/images/1706271251506_Captura de pantalla 2023-04-25 135011.png",
+          "http://localhost:3001//public/images/1706271257079_Captura de pantalla 2023-04-09 093042.png",
+          "http://localhost:3001//public/images/1706271267982_Captura de pantalla 2023-04-27 151556.png"
+        ],
+        "areaItems": [
+          {
+            "desc": "Eventos de seguridad reportados dentro del turno",
+            "state": [
+              true
+            ],
+            "comments": "informe 26 de enero"
+          },
+          {
+            "desc": "Nuevos descargos abiertos o cerrados",
+            "state": [
+              true
+            ],
+            "comments": "prueba"
+          },
+          {
+            "desc": "Alarmas del Sistema PCI/ incidencias camión bomberos",
+            "state": [
+              true
+            ],
+            "comments": "prueba 2"
+          },
+          {
+            "desc": "Cumplido Objetivo de SWO's planificadas para el turno",
+            "state": [
+              false
+            ],
+            "comments": "comentarios"
+          },
+          {
+            "desc": "Comentario de seguridad del día (DJP de trabajos del día, Yellow, Red, Blue o Green bulletins)",
+            "state": [
+              false
+            ],
+            "comments": "comentarios"
+          }
+        ]
+      },
+      {
+        "areaName": "Producción",
+        "units": "PTE1 | PTE2",
+        "areaItems": [
+          {
+            "desc": "Logs Máximo creados en el turno. Reporte por excepción",
+            "state": [
+              true,
+              false
+            ],
+            "comments": "comentarios"
+          },
+          {
+            "desc": "Desviaciones de operación durante el turno y reportado en POD",
+            "state": [
+              false,
+              true
+            ],
+            "comments": "comentarios",
+            "coments": "comentario test"
+          },
+          {
+            "desc": "EFOR Off-Spect abiertos en el turno",
+            "state": [
+              true,
+              false
+            ],
+            "comments": "comentarios"
+          },
+          {
+            "desc": "Nuevos TOI/TMOD's creados o return to normal",
+            "state": [
+              false,
+              true
+            ],
+            "comments": "comentarios"
+          },
+          {
+            "desc": "Equipos forzados incluidos en TOI's / TMOD",
+            "state": [
+              true,
+              false
+            ],
+            "comments": "comentarios"
+          },
+          {
+            "desc": "IOW UNSAT: comentado en cambio de turno y reporte en LOG",
+            "state": [
+              false,
+              true
+            ],
+            "comments": "comentarios"
+          },
+          {
+            "desc": "Programación / ajuste mercado enviado",
+            "state": [
+              true,
+              false
+            ],
+            "comments": "comentarios"
+          },
+          {
+            "desc": "Datos en GADS",
+            "state": [
+              false,
+              true
+            ],
+            "comments": "comentarios"
+          }
+        ]
+      }
+    ]
+  }
+]
