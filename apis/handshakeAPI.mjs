@@ -1,117 +1,135 @@
 import { Router } from 'express';
 import path from 'path';
 import multer from 'multer';
-import { saveFile, loadFile } from '../utils/fileIO.mjs';
+import { saveFile, loadFile, deleteFile } from '../utils/fileIO.mjs';
 import puppeteer from 'puppeteer';
 import fs from 'fs';
 
 import mime from 'mime-types';
 import sanitizeFilename from 'sanitize-filename';
+import { URL } from 'url'; 
 
+import { reportValidation } from '../validations.mjs';
+import { __dirname } from '../serverCDT.mjs';
 
 
 const router = Router();
 
 
 
-router.get('/download-json', async (req, res) => {
+router.get('/downloadjson', async (req, res) => {
+
   const { fileName } = req.query;
+  const acceptfile = req.get('accept');
 
-  console.log("req fileName", fileName);
+  if (!fileName || !acceptfile.includes('application/json')) {
+    res.sendStatus(400);
+    return;
+  }
 
-  if (!fileName) return res.sendStatus(400).json({ error: 'Nombre de archivo no válido.' });
+  const routepath = fileName === 'lastReport.json' ? 'informes/lastJSON' : 'informes/informesJSON';
 
   try {
 
-    let filePath;
-
-    fileName === 'lastReport.json' ?
-      (filePath = path.join(process.cwd(), 'informes/lastJSON', fileName)) :
-      (filePath = path.join(process.cwd(), 'informes/informesJSON', fileName));
-
+    const filePath = path.join(process.cwd(), routepath, fileName);
     const file = loadFile(filePath);
 
-    file ? (res.status(200).json(JSON.parse(file))) :
-      (res.status(404).json({ error: 'Archivo no encontrado.' }));
+    if (!file) {
+      res.sendStatus(404);
+      return;
+    }
+
+    res.status(200).json(JSON.parse(file))
 
 
-  } catch (error) {
-    res.status(500).json({ error: 'Error interno del servidor.' });
-    console.error('Sending file error:', error);
+  } catch (e) {
+    console.error(e.message);
+    res.status(500).json(e.message);
   }
 
 });
 
 
 
-// router.post('/upload-img', (req, res) => {
-//   // Get the file that was set to our field named "image"
-//   const { image } = req.files; 
-//   // If no image submitted, exit
-//   if (!image) return res.sendStatus(400); 
-//   // If does not have image mime type prevent from uploading
-//   if (/^image/.test(image.mimetype)) return res.sendStatus(400); 
-//   // Move the uploaded image to our upload folder 
-//   image.mv(path.join(process.cwd() , '/public/images/' , image.name)); 
-//   // All good
-//   res.sendStatus(200);
-// });
-const allowedMimeTypes = ['image/jpeg', 'image/png', 'application/pdf'];
+router.post('/saveJson', async (req, res) => {
 
-router.post('/upload-img', (req, res) => {//csrfProtection
+  const data = req.body;
+  const validation = reportValidation(data);
 
-  console.log("upload-img" );
+  if (typeof (validation) === 'object' && validation !== null) {
+    res.status(400).json(validation);
+    return;
+  }
+
+  if (validation === null || validation !== 1) {
+    res.status(500).json(`Error durante la validación`);
+    return;
+  }
+
+  try {
+
+    const filename = data[0].handshake.fileID;
+    const reportsPath = path.join(process.cwd(), 'informes/informesJSON', filename);
+    const lastReportPath = path.join(process.cwd(), 'informes/lastJSON/lastReport.json');
+
+    saveFile(reportsPath, JSON.stringify(data, null, 2));
+    saveFile(lastReportPath, JSON.stringify(data, null, 2));
+
+    res.status(200).json(`Gracias por registrar el informe.\n\n Nombre del archivo:\n ${filename}`);
+
+  }
+
+  catch (e) {
+    console.error(e.message);
+    res.sendStatus(500);
+  }
+
+});
+
+
+
+
+
+const imgMimes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/bmp'];
+
+router.post('/upload-img', (req, res) => {
+
+  const uploadedImage = req.files.image;
+
+  console.log("upload-img", req.accepted);
+  console.log("upload-img", uploadedImage.mimetype);
+  console.log("upload-img", req.files.image.size);
+  // return res.status(100).json("probando image uploader SERVER");
 
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.status(400).json({ error: 'No files were uploaded.' });
   }
 
   const uploadedFile = req.files.image;
-  // Validación del tipo de archivo usando expresión regular
-  if (!/^image/.test(uploadedFile.mimetype) || !allowedMimeTypes.includes(uploadedFile.mimetype)) {
+
+  if (!/^image/.test(uploadedFile.mimetype) || !imgMimes.includes(uploadedFile.mimetype)) {
     return res.status(400).json({ error: 'Tipo de archivo no permitido.' });
   }
-  // Renombrar y desinfectar el nombre del archivo
+
   const safeFilename = sanitizeFilename(uploadedFile.name);
   const uniqueFilename = Date.now() + '_' + safeFilename;
   const uploadPath = path.join(process.cwd(), 'public/images', uniqueFilename);
-  
-  console.log("uploadPath" , uploadPath );
+
+  console.log("uploadPath", uploadPath);
 
   uploadedFile.mv(uploadPath, (err) => {
+
     if (err) {
-      return res.status(500).json({ error: err.message });
+      return res.status(500).json("ERROR DESDE EL SERVIDOR");
     }
 
     const imageUrl = `/public/images/${uniqueFilename}`;
-    res.json({ imageUrl });
+    res.status(200).json({ imageUrl });
+
   });
+
 });
 
-
-
-
-
- 
-
-router.post('/saveReport', async (req, res) => { 
-  try { 
-    const data = req.body;
-    const filename = data[0].handshake.fileID;
-    console.log('saveReport:', filename);
- // Validar 
-    const reportsPath = path.join(process.cwd(), 'informes/informesJSON', filename);
-    const lastReportPath = path.join(process.cwd(), 'informes/lastJSON/lastReport.json');
-
-    saveFile(reportsPath, JSON.stringify(data, null, 2));
-    saveFile(lastReportPath, JSON.stringify(data, null, 2));
-    // res.status(200).json({ mensaje: 'Solicitud POST recibida con éxito' });
-    res.status(200).json({ message: `Gracias por registrar el informe.\n\n Nombre del archivo:\n ${filename}` });
-  } catch (error) {
-    console.error('Error al procesar la solicitud:', error);
-    res.status(500).json({ error: 'Error interno del servidor' });
-  }
-});
 
 
 
@@ -149,9 +167,13 @@ router.post('/saveReport', async (req, res) => {
 
 
 router.get('/download-pdf', async (req, res) => {
-  console.log("download-pdf");
+  console.log("download-pdf", req.accepted);
+  console.log("download-pdf", req.body);
+  console.log("download-pdf", req.query);
 
   try {
+    // console.log("download-pdf", req.headers.get('if-modified-since'));
+
     const dateNow = new Date();
     const dateFormat = dateNow.toLocaleDateString('es-ES', { year: '2-digit', month: '2-digit', day: '2-digit' });
     const fileName = `informe${dateFormat.replace(/\//g, '-')}.pdf`;
@@ -160,29 +182,66 @@ router.get('/download-pdf', async (req, res) => {
     const browser = await puppeteer.launch({ headless: "new" });
     const page = await browser.newPage();
 
-    await page.setViewport({ width: 1920, height: 1080, deviceScaleFactor: 2 });
-
     await page.goto('http://localhost:3000/pages/handshake', { waitUntil: 'networkidle2' });
-
-    await page.pdf({ path: filePath, format: 'A4', printBackground: true });
+    await page.pdf({ path: filePath, format: 'a4', printBackground: true, scale: .65 });
     await browser.close();
 
 
     res.download(filePath, fileName, (err) => {
       if (err) {
-        res.status(500).send('Error al descargar el archivo');
-      } else { //borrar pdf.
-        fs.unlink(filePath, (err) => { if (err) { console.error(err); throw err; } });
+        res.status(404).send(`Archivo ${fileName} no encontrado`);
+      }
+      else {
+        fs.unlink(filePath, (err) => { if (err) { console.error(err); } });
       }
     });
 
-  } catch (error) {
-    console.error(error);
-    res.status(400).send('Error al generar el PDF.');
+  }
+
+  catch (e) {
+    res.status(500).send(`Error al generar el PDF.${e}`);
   }
 
 });
 
+
+
+
+
+
+const videoMimes = ['video/mp4', 'video/webm', 'video/ogg'];
+
+router.post('/uploadvideo', (req, res) => {
+
+  console.log("uploadvideo");
+  const video = req.files.video;
+
+  console.log("uploadvideo", video.mimetype);
+  console.log("uploadvideo", req.files.video.size);
+  // return res.status(100).json("probando image uploader SERVER");
+
+  if (!req.files || Object.keys(req.files).length === 0 || !/^video/.test(video.mimetype) || !videoMimes.includes(video.mimetype)) {
+    return res.sendStatus(400);
+  }
+
+  const safeFilename = sanitizeFilename(video.name);
+  const uniqueFilename = Date.now() + '_' + safeFilename;
+  const uploadPath = path.join(process.cwd(), 'public/video', uniqueFilename);
+
+  console.log("uploadPath", uniqueFilename);
+
+  video.mv(uploadPath, (err) => {
+
+    if (err) {
+      return res.status(500).json("ERROR DESDE EL SERVIDOR");
+    }
+
+    const videoUrl = `/public/video/${uniqueFilename}`;
+    res.status(200).json(videoUrl);
+
+  });
+
+});
 
 
 
@@ -228,16 +287,52 @@ router.get('/download-pdf', async (req, res) => {
 
 
 
+router.get('/delete-file', async (req, res) => {
+
+  const { urlFile } = req.query;
+  console.log("urlFile", urlFile);
 
 
 
+  //  res.status(200).json("respuesta desde delete file" +  urlFile );
+
+  if (!urlFile) {
+    res.sendStatus(400);
+    console.log("status(400)" );
+    return;
+  }
+
+  try {
+    const url = new URL(urlFile);
+    // const filePath = path.join(__dirname, decodeURIComponent(url.pathname));
+    console.log("url", url );
+    console.log("url.pathname", url.pathname );
+
+const decodePath = decodeURIComponent(url.pathname);
+
+    console.log("url.pathnamedecodeURIComponent", decodeURIComponent(url.pathname));
+  console.log("__dirname", __dirname);  
 
 
+const filePath = path.join(__dirname, decodePath);
+    console.log("filePath", filePath );
+    
+const db = deleteFile(filePath);
+console.log("db", db );
+
+    if (db) {
+      console.log("status(200)" );
+      res.status(200).json("archivo eliminado. url: " + urlFile)
+    } 
+  } catch (e) {
+    console.error(e.message);
+    res.status(500).json(e.message);
+  }
 
 
+ 
 
-
-
+});
 
 
 
