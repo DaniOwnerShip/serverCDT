@@ -7,7 +7,7 @@ import fs from 'fs';
 
 import mime from 'mime-types';
 import sanitizeFilename from 'sanitize-filename';
-import { URL } from 'url'; 
+import { URL } from 'url';
 
 import { reportValidation } from '../validations.mjs';
 import { __dirname } from '../serverCDT.mjs';
@@ -32,6 +32,7 @@ router.get('/downloadjson', async (req, res) => {
   try {
 
     const filePath = path.join(process.cwd(), routepath, fileName);
+
     const file = loadFile(filePath);
 
     if (!file) {
@@ -39,13 +40,17 @@ router.get('/downloadjson', async (req, res) => {
       return;
     }
 
-    res.status(200).json(JSON.parse(file))
+    res.status(200).json(JSON.parse(file));
 
+  }
 
-  } catch (e) {
+  catch (e) {
+
     console.error(e.message);
     res.status(500).json(e.message);
+
   }
+
 
 });
 
@@ -56,14 +61,12 @@ router.post('/saveJson', async (req, res) => {
   const data = req.body;
   const validation = reportValidation(data);
 
-  if (typeof (validation) === 'object' && validation !== null) {
-    res.status(400).json(validation);
-    return;
+  if (typeof (validation) === 'object' && validation !== null) { 
+    return res.status(400).json(validation); 
   }
 
-  if (validation === null || validation !== 1) {
-    res.status(500).json(`Error durante la validación`);
-    return;
+  if (validation === null || validation !== 1) { 
+    return res.status(500).json(`Error durante la validación`); 
   }
 
   try {
@@ -75,7 +78,7 @@ router.post('/saveJson', async (req, res) => {
     saveFile(reportsPath, JSON.stringify(data, null, 2));
     saveFile(lastReportPath, JSON.stringify(data, null, 2));
 
-    res.status(200).json(`Gracias por registrar el informe.\n\n Nombre del archivo:\n ${filename}`);
+    res.status(200).json(`Archivo guardado correctamente.\n\n archivo:\n ${filename}`);
 
   }
 
@@ -136,35 +139,6 @@ router.post('/upload-img', (req, res) => {
 
 
 
-// const storage = multer.memoryStorage();
-// const upload = multer({ storage: storage });
-
-// router.post('/saveReport', upload.single('archivo'), async (req, res) => {
-//   console.log('saveReport:' );
-
-//   try {
-
-//     const fileData = req.file;
-//     const fileName = fileData.originalname;
-//   console.log('saveReport:', fileName);
-//     const jsonString = fileData.buffer.toString('utf-8');
-//     const reportsPath = path.join(process.cwd(), 'informes/informesJSON', fileName);
-//     const lastReportPath = path.join(process.cwd(), 'informes/lastJSON', 'lastReport.json');
-
-//     saveFile(reportsPath, jsonString);
-//     saveFile(lastReportPath, jsonString);
-
-//     res.json({ message: `Gracias por registrar el informe.\n\n Nombre del archivo:\n ${fileName}` });
-
-//   } catch (error) {
-//     console.error('Error at save files:', error);
-//     res.status(400).json({ message: 'Error at save files' });
-//   }
-
-// });
-
-
-
 
 router.get('/download-pdf', async (req, res) => {
   console.log("download-pdf", req.accepted);
@@ -172,7 +146,6 @@ router.get('/download-pdf', async (req, res) => {
   console.log("download-pdf", req.query);
 
   try {
-    // console.log("download-pdf", req.headers.get('if-modified-since'));
 
     const dateNow = new Date();
     const dateFormat = dateNow.toLocaleDateString('es-ES', { year: '2-digit', month: '2-digit', day: '2-digit' });
@@ -213,12 +186,7 @@ const videoMimes = ['video/mp4', 'video/webm', 'video/ogg'];
 
 router.post('/uploadvideo', (req, res) => {
 
-  console.log("uploadvideo");
   const video = req.files.video;
-
-  console.log("uploadvideo", video.mimetype);
-  console.log("uploadvideo", req.files.video.size);
-  // return res.status(100).json("probando image uploader SERVER");
 
   if (!req.files || Object.keys(req.files).length === 0 || !/^video/.test(video.mimetype) || !videoMimes.includes(video.mimetype)) {
     return res.sendStatus(400);
@@ -244,6 +212,39 @@ router.post('/uploadvideo', (req, res) => {
 });
 
 
+
+
+
+
+
+router.get('/delete-file', async (req, res) => {
+
+  const { urlFile } = req.query;
+  console.log("urlFile", urlFile);
+
+  if (!urlFile) {
+    res.sendStatus(400);
+    return;
+  }
+
+  try {
+
+    const url = new URL(urlFile);
+    const decodePath = decodeURIComponent(url.pathname);
+    const filePath = path.join(__dirname, decodePath);
+
+    deleteFile(filePath);
+
+    res.status(200).json("archivo eliminado. url: " + urlFile)
+
+  }
+
+  catch (e) {
+    console.error(e.message);
+    res.status(500).json(e.message);
+  }
+
+});
 
 
 
@@ -284,57 +285,6 @@ router.post('/uploadvideo', (req, res) => {
 
 
 // });
-
-
-
-router.get('/delete-file', async (req, res) => {
-
-  const { urlFile } = req.query;
-  console.log("urlFile", urlFile);
-
-
-
-  //  res.status(200).json("respuesta desde delete file" +  urlFile );
-
-  if (!urlFile) {
-    res.sendStatus(400);
-    console.log("status(400)" );
-    return;
-  }
-
-  try {
-    const url = new URL(urlFile);
-    // const filePath = path.join(__dirname, decodeURIComponent(url.pathname));
-    console.log("url", url );
-    console.log("url.pathname", url.pathname );
-
-const decodePath = decodeURIComponent(url.pathname);
-
-    console.log("url.pathnamedecodeURIComponent", decodeURIComponent(url.pathname));
-  console.log("__dirname", __dirname);  
-
-
-const filePath = path.join(__dirname, decodePath);
-    console.log("filePath", filePath );
-    
-const db = deleteFile(filePath);
-console.log("db", db );
-
-    if (db) {
-      console.log("status(200)" );
-      res.status(200).json("archivo eliminado. url: " + urlFile)
-    } 
-  } catch (e) {
-    console.error(e.message);
-    res.status(500).json(e.message);
-  }
-
-
- 
-
-});
-
-
 
 
 
