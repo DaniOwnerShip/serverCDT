@@ -23,9 +23,7 @@
         "areaName": "Seguridad",
         "units": "Estado",
         "urlImages": [
-          "http://localhost:3001//public/images/1707024632683_marineros.png",
-          "http://localhost:3001//public/images/1707025450998_Captura de pantalla 2023-04-09 093042.png",
-          "http://localhost:3001//public/images/1707026683815_Captura de pantalla 2023-04-25 165817.png"
+ 
         ],
         "urlVideos": [
           "http://localhost:3001//public/video/1707057549449_Test.py - Visual Studio Code 2023-04-28 17-24-26.mp4"
@@ -71,8 +69,7 @@
       {
         "areaName": "Producción",
         "units": "PTE1 | PTE2",
-        "urlImages": [
-          "http://localhost:3001//public/images/1706807249479_Captura de pantalla 2023-04-25 165817.png"
+        "urlImages": [ 
         ],
         "areaItems": [
           {
@@ -145,8 +142,7 @@
       {
         "areaName": "Producción",
         "units": "PTE1 | PTE2",
-        "urlImages": [
-          "http://localhost:3001//public/images/1706807249479_Captura de pantalla 2023-04-25 165817.png"
+        "urlImages": [ 
         ],
         "urlVideos": [],
         "areaItems": [
@@ -293,8 +289,7 @@
       {
         "areaName": "Producción",
         "units": "PTE1 | PTE2",
-        "urlImages": [
-          "http://localhost:3001//public/images/1706807249479_Captura de pantalla 2023-04-25 165817.png"
+        "urlImages": [ 
         ],
         "areaItems": [
           {

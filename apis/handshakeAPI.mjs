@@ -44,15 +44,16 @@ router.get('/downloadjson', async (req, res) => {
 
   }
 
-  catch (e) {
-
+  catch (e) { 
     console.error(e.message);
-    res.status(500).json(e.message);
-
-  }
-
+    res.status(500).json(e.message); 
+  } 
 
 });
+
+
+
+
 
 
 
@@ -78,7 +79,7 @@ router.post('/saveJson', async (req, res) => {
     saveFile(reportsPath, JSON.stringify(data, null, 2));
     saveFile(lastReportPath, JSON.stringify(data, null, 2));
 
-    res.status(200).json(`Archivo guardado correctamente.\n\n archivo:\n ${filename}`);
+    res.status(200).json(`Archivo guardado correctamente.\n\n ${filename}`);
 
   }
 
@@ -93,57 +94,8 @@ router.post('/saveJson', async (req, res) => {
 
 
 
-const imgMimes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/bmp'];
 
-router.post('/upload-img', (req, res) => {
-
-  const uploadedImage = req.files.image;
-
-  console.log("upload-img", req.accepted);
-  console.log("upload-img", uploadedImage.mimetype);
-  console.log("upload-img", req.files.image.size);
-  // return res.status(100).json("probando image uploader SERVER");
-
-  if (!req.files || Object.keys(req.files).length === 0) {
-    return res.status(400).json({ error: 'No files were uploaded.' });
-  }
-
-  const uploadedFile = req.files.image;
-
-  if (!/^image/.test(uploadedFile.mimetype) || !imgMimes.includes(uploadedFile.mimetype)) {
-    return res.status(400).json({ error: 'Tipo de archivo no permitido.' });
-  }
-
-  const safeFilename = sanitizeFilename(uploadedFile.name);
-  const uniqueFilename = Date.now() + '_' + safeFilename;
-  const uploadPath = path.join(process.cwd(), 'public/images', uniqueFilename);
-
-  console.log("uploadPath", uploadPath);
-
-  uploadedFile.mv(uploadPath, (err) => {
-
-    if (err) {
-      return res.status(500).json("ERROR DESDE EL SERVIDOR");
-    }
-
-    const imageUrl = `/public/images/${uniqueFilename}`;
-    res.status(200).json({ imageUrl });
-
-  });
-
-});
-
-
-
-
-
-
-
-
-router.get('/download-pdf', async (req, res) => {
-  console.log("download-pdf", req.accepted);
-  console.log("download-pdf", req.body);
-  console.log("download-pdf", req.query);
+router.get('/download-pdf', async (req, res) => { 
 
   try {
 
@@ -182,6 +134,46 @@ router.get('/download-pdf', async (req, res) => {
 
 
 
+
+const imgMimes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/bmp'];
+
+router.post('/upload-img', (req, res) => { 
+
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return res.sendStatus(400);
+  }
+
+  const uploadedFile = req.files.image;
+
+  if (!/^image/.test(uploadedFile.mimetype) || !imgMimes.includes(uploadedFile.mimetype)) {
+    return res.status(400).json({ error: 'Tipo de archivo no permitido.' });
+  }
+
+  const safeFilename = sanitizeFilename(uploadedFile.name);
+  const uniqueFilename = Date.now() + '_' + safeFilename;
+  const uploadPath = path.join(process.cwd(), 'public/images', uniqueFilename);
+
+  console.log("uploadPath", uploadPath);
+
+  uploadedFile.mv(uploadPath, (err) => {
+
+    if (err) {
+      console.log("upload-img err", err.message);
+      return res.sendStatus(500);
+    }
+
+    const imageUrl = `/public/images/${uniqueFilename}`; 
+    res.status(200).json({imageUrl})
+
+  });
+
+});
+
+ 
+
+
+
+
 const videoMimes = ['video/mp4', 'video/webm', 'video/ogg'];
 
 router.post('/uploadvideo', (req, res) => {
@@ -201,7 +193,8 @@ router.post('/uploadvideo', (req, res) => {
   video.mv(uploadPath, (err) => {
 
     if (err) {
-      return res.status(500).json("ERROR DESDE EL SERVIDOR");
+      console.log("upload-video err", err.message);
+      return res.sendStatus(500);
     }
 
     const videoUrl = `/public/video/${uniqueFilename}`;
@@ -247,46 +240,7 @@ router.get('/delete-file', async (req, res) => {
 });
 
 
-
-
-
-
-
-// router.get('/download-pdf', async (req, res) => {
-//   console.log("download-pdf"); 
-//     try {
-//       const browser = await puppeteer.launch({ headless: "new" });
-//       const page = await browser.newPage();
-//       await page.goto('http://localhost:3000/pages/handshake');
-//       // await page.waitForNavigation({ waitUntil: 'load' });
-//       const dateNow = new Date();
-//       const dateFormat = dateNow.toLocaleDateString('es-ES', { year: '2-digit', month: '2-digit', day: '2-digit' }); 
-//       const fileName = `informe${dateFormat.replace(/\//g, '-')}.pdf`; 
-//       const outPath = path.join(process.cwd(), 'informes/informesPDF', fileName);
-
-//       await page.pdf({ path: outPath, format: 'A4', printBackground: true });
-
-//       await browser.close();
-
-//       res.download(outPath, fileName, (err) => {
-//         if (err) {
-//           console.error(err);
-//           res.status(400).send('Error al descargar el archivo.');
-//         }
-//         // else {
-//         //   // Eliminar archivo  
-//         //   // fs.unlinkSync(outPath);
-//         // }
-//       });
-//     } catch (error) {
-//       console.error(error);
-//       res.status(400).send('Error al generar el PDF.');
-//     }
-
-
-// });
-
-
+ 
 
 
 export default router;
