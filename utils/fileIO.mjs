@@ -1,32 +1,32 @@
-import fs from 'fs';
+// import fs from 'fs';
 
 
-export function loadFile(filePath) {
+// export function loadFile(filePath) {
 
-  if (!fs.existsSync(filePath)) {
-    return false;
-  }
+//   if (!fs.existsSync(filePath)) {
+//     return false;
+//   }
 
-  const fileContent = fs.readFileSync(filePath, 'utf-8');
+//   const fileContent = fs.readFileSync(filePath, 'utf-8');
 
-  return fileContent;
+//   return fileContent;
 
-}
-
-
-
-export function saveFile(filePath, jsonString) {
-
-  fs.writeFileSync(filePath, jsonString, 'utf-8');
-
-}
+// }
 
 
 
-export function deleteFile(filePath) {
+// export function saveFile(filePath, jsonString) {
 
-  fs.unlinkSync(filePath);
+//   fs.writeFileSync(filePath, jsonString, 'utf-8');
 
-}
+// }
+
+
+
+// export function deleteFile(filePath) {
+
+//   fs.unlinkSync(filePath);
+
+// }
 
 

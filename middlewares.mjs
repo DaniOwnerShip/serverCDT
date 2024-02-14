@@ -27,8 +27,29 @@ export const fileLimiter = fileUpload({
   abortOnLimit: true,
 });
 
+// export const corsOptions = cors({
+//   origin: 'http://localhost:3000', //dev
+//   credentials: true,
+//   exposedHeaders: ['Content-Metadata', 'Content-Disposition'],
+// })
 export const corsOptions = cors({
-  origin: 'http://localhost:3000', //dev
-  credentials: true,
-  exposedHeaders: ['Content-Metadata', 'Content-Disposition'],
+  origin: ["http://localhost:3000"],
+  credentials: true
 })
+// const corsOptions = {
+//   origin: ["http://localhost:3000"],
+//   credentials: true
+// };
+
+
+// const corsOptions = {
+//   origin: ["http://localhost:3000"],
+//   credentials: true
+// };
+
+
+// export const corsOptions = {
+//   origin: 'http://localhost:3000', // Permitir solicitudes solo desde localhost:3000
+//   credentials: true, // Permitir el envío de cookies de origen cruzado
+//   exposedHeaders: ['Content-Metadata', 'Content-Disposition'], // Exponer ciertos encabezados personalizados
+// };

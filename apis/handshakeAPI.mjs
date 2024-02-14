@@ -1,14 +1,9 @@
 import { Router } from 'express';
 import path from 'path';
-import multer from 'multer';
-import { saveFile, loadFile, deleteFile } from '../utils/fileIO.mjs';
 import puppeteer from 'puppeteer';
 import fs from 'fs';
-
-import mime from 'mime-types';
 import sanitizeFilename from 'sanitize-filename';
 import { URL } from 'url';
-
 import { reportValidation } from '../validations.mjs';
 import { __dirname } from '../serverCDT.mjs';
 
@@ -16,38 +11,99 @@ import { __dirname } from '../serverCDT.mjs';
 const router = Router();
 
 
+router.get('/testConn', async (req, res) => {
+
+  console.log("req.query", req.query);
+  console.log("req.ip", req.ip);
+  const doc = req.query;
+
+  const reserveDoc = {
+    id: doc.docID,
+    ip: req.ip,
+    reservado: true
+  };
+
+  console.log("reserveDoc", reserveDoc.id);
+  console.log("reservado", reserveDoc.reservado);
+  console.log("ip", reserveDoc.ip);
+
+  res.json({ mensaje: 'El documento ha sido reservado con éxito.' });
+
+
+
+
+
+
+
+
+
+  // console.log("req.secure", req.secure);
+  // console.log("req.ip", req.ip);
+  // console.log("req.originalUrl", req.originalUrl);  
+  // console.log("req.accepted", req.accepted);
+  // console.log("req.socket", req.socket); 
+  // console.log("req.app", req.app);
+  // console.log("req.subdomains", req.subdomains);
+  // console.log("req.query", req.baseUrl);
+  // console.log("req.query", req.body);
+  // console.log("req.query", req.closed);
+  // console.log("req.query", req.complete);
+  // console.log("req.query", req.cookies);
+  // console.log("req.query", req.destroyed);
+  // console.log("req.query", req.headers);
+  // console.log("req.query", req.headersDistinct);
+  // console.log("req.query", req.hostname);
+  // console.log("req.query", req.httpVersion);
+  // console.log("req.query", req.rawHeaders);
+  // console.log("req.query", req.xhr);
+  // console.log("req.query", req.readableHighWaterMark);
+  // console.log("req.query", req.method);
+  // console.log("req.query", req.path);
+  // console.log("req.query", req.protocol);
+  // console.log("req.query", req.ips);
+  // console.log("req.query", req.readable);
+  // console.log("req.query", req.readableLength);
+  // console.log("req.query", req.res);
+  // console.log("req.query", req.route);
+  // console.log("req.query", req.signedCookies);
+  // console.log("req.query", req.trailers);
+
+}
+);
+
+
+
 
 router.get('/downloadjson', async (req, res) => {
 
-  const { fileName } = req.query;
-  const acceptfile = req.get('accept');
-
-  if (!fileName || !acceptfile.includes('application/json')) {
-    res.sendStatus(400);
-    return;
-  }
-
-  const routepath = fileName === 'lastReport.json' ? 'informes/lastJSON' : 'informes/informesJSON';
-
   try {
+
+    const { fileName } = req.query;
+    const acceptfile = req.get('accept');
+    const routepath = fileName === 'informe-last.json' ? 'informes/lastJSON' : 'informes/informesJSON';
+
+    if (!fileName || !acceptfile.includes('application/json') || !fileName.includes('informe-') || fileName.length > 20) {
+      res.status(400).json('Nombre de archivo erróneo');
+      return;
+    }
 
     const filePath = path.join(process.cwd(), routepath, fileName);
 
-    const file = loadFile(filePath);
-
-    if (!file) {
-      res.sendStatus(404);
+    if (!fs.existsSync(filePath)) {
+      res.status(400).json('Archivo no encontrado');
       return;
     }
+
+    const file = fs.readFileSync(filePath, 'utf-8');
 
     res.status(200).json(JSON.parse(file));
 
   }
 
-  catch (e) { 
+  catch (e) {
     console.error(e.message);
-    res.status(500).json(e.message); 
-  } 
+    res.status(500).json(e.message);
+  }
 
 });
 
@@ -62,12 +118,12 @@ router.post('/saveJson', async (req, res) => {
   const data = req.body;
   const validation = reportValidation(data);
 
-  if (typeof (validation) === 'object' && validation !== null) { 
-    return res.status(400).json(validation); 
+  if (typeof (validation) === 'object' && validation !== null) {
+    return res.status(400).json(validation);
   }
 
-  if (validation === null || validation !== 1) { 
-    return res.status(500).json(`Error durante la validación`); 
+  if (validation === null || validation !== 1) {
+    return res.status(500).json(`Error durante la validación`);
   }
 
   try {
@@ -76,8 +132,8 @@ router.post('/saveJson', async (req, res) => {
     const reportsPath = path.join(process.cwd(), 'informes/informesJSON', filename);
     const lastReportPath = path.join(process.cwd(), 'informes/lastJSON/lastReport.json');
 
-    saveFile(reportsPath, JSON.stringify(data, null, 2));
-    saveFile(lastReportPath, JSON.stringify(data, null, 2));
+    fs.writeFileSync(reportsPath, JSON.stringify(data, null, 2), 'utf-8');
+    fs.writeFileSync(lastReportPath, JSON.stringify(data, null, 2), 'utf-8');
 
     res.status(200).json(`Archivo guardado correctamente.\n\n ${filename}`);
 
@@ -95,7 +151,7 @@ router.post('/saveJson', async (req, res) => {
 
 
 
-router.get('/download-pdf', async (req, res) => { 
+router.get('/download-pdf', async (req, res) => {
 
   try {
 
@@ -137,7 +193,7 @@ router.get('/download-pdf', async (req, res) => {
 
 const imgMimes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/bmp'];
 
-router.post('/upload-img', (req, res) => { 
+router.post('/upload-img', (req, res) => {
 
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.sendStatus(400);
@@ -162,14 +218,14 @@ router.post('/upload-img', (req, res) => {
       return res.sendStatus(500);
     }
 
-    const imageUrl = `/public/images/${uniqueFilename}`; 
-    res.status(200).json({imageUrl})
+    const imageUrl = `/public/images/${uniqueFilename}`;
+    res.status(200).json({ imageUrl })
 
   });
 
 });
 
- 
+
 
 
 
@@ -226,7 +282,7 @@ router.get('/delete-file', async (req, res) => {
     const decodePath = decodeURIComponent(url.pathname);
     const filePath = path.join(__dirname, decodePath);
 
-    deleteFile(filePath);
+    fs.unlinkSync(filePath);
 
     res.status(200).json("archivo eliminado. url: " + urlFile)
 
@@ -240,7 +296,7 @@ router.get('/delete-file', async (req, res) => {
 });
 
 
- 
+
 
 
 export default router;

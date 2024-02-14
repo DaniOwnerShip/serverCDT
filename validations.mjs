@@ -4,10 +4,9 @@ import { z } from "zod";
 export function reportValidation(data) {
  
     try {
-
-        console.log('reportValidation2 ')
+ 
         const handshakeSchema = z.object({
-            fileID: z.string().length(20),
+            fileID: z.string().length(21),
             tittle: z.string().includes("Cambio de Turno").length(15),
             party: z.array(
                 z.object({
@@ -19,7 +18,7 @@ export function reportValidation(data) {
         });
 
         handshakeSchema.parse(data[0].handshake);
-
+ 
         const areaSchema = z.object({
             areaName: z.string(),
             units: z.string(),
@@ -31,11 +30,11 @@ export function reportValidation(data) {
             }))
         });
 
-        data[1].blocksAreas.forEach((area) => {
+        data[1].areas.forEach((area) => {
             areaSchema.parse(area);
         });
 
-
+ 
         return 1;
 
     }
