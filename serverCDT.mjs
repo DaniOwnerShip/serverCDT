@@ -77,84 +77,127 @@ app.prepare().then(() => {
     cors: corsOptions
   });
 
-  let docReserve = { isReserved: false, docId: '', userIP: '' };
 
+  // Same objects used in the client. I
+  const IdocStatus = {
+    required: "required",
+    reserved: "reserved",
+    released: "released"
+  };
+  let IdocReserve = { reqStatus: IdocStatus.released, docId: null, userIP: '' };
   let usersOn = [];
+
+
+
 
   io.on("connection", (socket) => {
 
-    console.log('Cliente conectado', socket.id);
-
     const ipConn = socket.handshake.address;
-    console.log('IP cliente:', ipConn);
+
+    console.log('usuario conectado', socket.id, ' IP ', ipConn);
 
     if (!usersOn.includes(ipConn)) {
       usersOn.push(ipConn);
     }
- 
+
 
     io.emit('users', usersOn);
 
-
-
-
-    socket.on('reserveDoc', (reserveDoc) => {
-
-      if (docReserve.docId === reserveDoc.docId) {
-        console.log('Reserva denegada: ' + docReserve.docId + ' Ya está reservado por: ' + docReserve.userIP);
-        // io.emit('broadcast__DocStatus', 'Reserva denegada: '  + docReserve.docId + ' Ya está reservado por: ' + docReserve.userIP);
-        // io.emit('broadcast__DocStatus', 'Reserva solicitada por: ' + ipConn + ' Denegada. El ' + docReserve.docId + ' Ya está reservado por: ' + docReserve.userIP);
-        io.emit('broadcast__DocStatus', {
-          status: false, 
-          reserve: reserveDoc,
-          message:'Reserva solicitada por: ' + ipConn + ' Denegada. El ' + docReserve.docId + ' Ya está reservado por: ' + docReserve.userIP
-        });
-
-      } else {
-        reserveDoc = { isReserved: 'enabled', docId: reserveDoc.docId, userIP: ipConn };
-        docReserve = reserveDoc; 
-        console.log('Reserva apectada: ' + docReserve.docId + ' Por: ' + docReserve.userIP);
-        io.emit('broadcast__DocStatus', {
-          status: true, 
-          reserve: reserveDoc, 
-          message:'Reserva apectada: ' + docReserve.docId + ' Por: ' + docReserve.userIP
-        });
-      }
-
-    });
 
     socket.on('comment', (comment) => {
       io.emit('comment', ipConn + ' -> ' + comment);
     });
 
 
+    
 
 
-    socket.on("disconnect", () => {
+    socket.on('reserveDoc', (docReserve) => {
 
-      console.log('Cliente desconectado', ipConn);
+      console.log('docReserve: ', docReserve);
+      console.log('Reserva docId: ', IdocReserve.docId);
+      console.log('Reserva docId: ', docReserve.docId);
+      console.log('Reserva reqStatus: ', docReserve.reqStatus);
+      if (docReserve.reqStatus === IdocStatus.required && IdocReserve.docId === docReserve.docId) {
 
-      if (docReserve.userIP === ipConn) {
-        console.log('Reserva liberada: ' + docReserve.docId + ' Por: ' + docReserve.userIP);
-        io.emit('broadcast__DocStatus', 'Reserva liberada: ' + docReserve.docId + ' Por: ' + docReserve.userIP);
-        docReserve = { isReserved: 'disabled', docId: '', userIP: '' };
+        socket.emit('reserveStatus', {
+          IdocReserve: IdocReserve,
+          message: 'Reserva denegada. El ' + IdocReserve.docId + ' está reservado por: ' + IdocReserve.userIP
+        });
+
+        console.log('Reserva denegada. El ' + IdocReserve.docId + ' está reservado por: ' + IdocReserve.userIP);
       }
+      else {
 
-      const index = usersOn.indexOf(ipConn);
+        IdocReserve = { reqStatus: IdocStatus.reserved, docId: docReserve.docId, userIP: ipConn };
 
-      // Si se encuentra el usuario en el array, eliminarlo
-      if (index !== -1) {
-        usersOn.splice(index, 1);
-        console.log('Usuario eliminado del array de usuarios conectados.'); 
-        io.emit('users', usersOn);
+        io.emit('reserveStatus', {
+          IdocReserve: IdocReserve,
+          message: IdocReserve.docId + ' Reservado por: ' + IdocReserve.userIP
+          // message: 'Reserva apectada: ' + IdocReserve.docId + ' para: ' + IdocReserve.userIP
+        });
+
+        console.log('Reserva apectada: ' + IdocReserve.docId + ' Por: ' + IdocReserve.userIP);
       }
-
-
 
     });
 
 
+
+
+
+
+
+    socket.on('releaseDoc', (docReserve) => {
+
+      console.log('releaseDoc', docReserve);
+
+      if (docReserve.reqStatus === IdocStatus.released && IdocReserve.docId === docReserve.docId && IdocReserve.userIP === ipConn) {
+
+        IdocReserve = { reqStatus: IdocStatus.released, docId: docReserve.docId, userIP: ipConn };
+
+        io.emit('broadcast__DocStatus', {
+          IdocReserve: IdocReserve,
+          // message: 'Reserva liberada: ' + IdocReserve.docId + ' Por: ' + IdocReserve.userIP
+          message: IdocReserve.docId + ' Liberado por: ' + IdocReserve.userIP
+        });
+
+        console.log('Reserva liberada: ' + IdocReserve.docId + ' Por: ' + IdocReserve.userIP);
+        IdocReserve = { reqStatus: IdocStatus.released, docId: null, userIP: '' };
+
+      }
+
+    });
+
+
+
+
+
+    socket.on("disconnect", () => {
+
+      console.log('usuario desconectado', ipConn);  
+      const index = usersOn.indexOf(ipConn);
+
+      if (index !== -1) {
+        usersOn.splice(index, 1);
+        io.emit('users', usersOn);
+        console.log('usuarios conectados', usersOn?.length);
+      }
+
+    });
+
+
+
+
   });
+
+
+
+
+
+
+
+
 
 
   serverExpress.all('*', (req, res) => {
@@ -173,8 +216,8 @@ app.prepare().then(() => {
 
 
   // console.log('Cliente desconectado', socket.id);
-  // console.log('docReserve', docReserve);
-  //    io.emit('broadcast__DocReserved', 'El documento ha sido reservado' + docReserve.docId + docReserve.userIP);
+  // console.log('IdocReserve', IdocReserve);
+  //    io.emit('broadcast__DocReserved', 'El documento ha sido reservado' + IdocReserve.docId + IdocReserve.userIP);
   // console.log('Reserve Required:', message);
   // io.emit("broadcast__DocReserved", message);
   // socket.on('isReserved', (message) => {
