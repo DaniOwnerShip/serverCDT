@@ -6,7 +6,7 @@ export function reportValidation(data) {
     try {
  
         const handshakeSchema = z.object({
-            fileID: z.string().length(21),
+            fileID: z.string().length(27),
             tittle: z.string().includes("Cambio de Turno").length(15),
             party: z.array(
                 z.object({
