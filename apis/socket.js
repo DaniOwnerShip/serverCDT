@@ -1,85 +1,85 @@
+import docReserve from "../docReserve.json" assert { type: "json" };   
 
 
+const newDocReserve = { ...docReserve };
 
 
-// PENDIENTE VALIDACIONES !!
+// pend. validaciones !!
 
 export default function initSocket(serverSocket) {
 
-    const IdocState = {
-        required: "required",
-        reserved: "reserved",
-        released: "released"
-    };
-    // let IdocReserve = { reqState: IdocState.released, docId: null, userIP: '', userAlias: '' };
-    let IdocReserve = { docId: "", userOwner: {}, reqState: IdocState.reserved };
     let usersOn = [];
 
     const io = serverSocket;
 
     io.on("connection", (socket) => {
 
-        // const userIP = socket.handshake.address;
-        // const userAlias = socket.handshake.query.userAlias;
-        const user = {
-            IP: socket.handshake.address,
-            alias: socket.handshake.query.userAlias,
-            socketID: socket.id
+
+        console.log('connection:');
+
+        const userIP = socket.handshake.address;
+        const userAlias = socket.handshake.query.userAlias;
+        const soketID = socket.id;
+
+        const newUser = {
+            IP: userIP,
+            alias: userAlias,
+            socketID: soketID
         }
+ 
+        usersOn.push({ userIP, userAlias });  
 
-        usersOn.push(user);
-
-        io.emit('users', usersOn);                    
-        
+        io.emit('users', usersOn);
+ 
         socket.emit('connectRes', {
-            user: user ,
-            message: 'Conexión establecida como:  ' + user.alias + ' [' + user.IP + ']'
+            user: newUser,
+            message: 'Conexión establecida como:  ' + newUser.alias + ' [' + newUser.IP + ']'
         });
 
         if (usersOn.length >= 1) {
-            socket.broadcast.emit("comment", user.alias + ' se ha conectado');
+            socket.broadcast.emit("comment", newUser.alias + ' se ha conectado');
         }
 
-        console.log('usuario conectado', user.socketID, ' IP', user.IP, ' alias', user.alias);
-
+        console.log('usuario conectado', newUser.alias + ' se ha conectado');
 
         socket.on('comment', (comment) => {
-            io.emit('comment', user.alias + ' -> ' + comment);
+            io.emit('comment', newUser.alias + ' -> ' + comment);
         });
 
 
 
-        socket.on('reserveReq', (docReserve) => {
 
-            const docName = IdocReserve.docId.split('.')[0];
 
-            console.log('reserveReq', docReserve);
-            if (docReserve.reqState === IdocState.required) {
+        socket.on('reserveReq', (ReqDocReserve) => {
 
-                if (docReserve.docId === IdocReserve.docId) {
+            const docName = ReqDocReserve.docId.split('.')[0];
+
+            console.log('reserveReq', ReqDocReserve);
+
+            if (ReqDocReserve.reqState === newDocReserve.reqState.reserved) {
+
+                if (ReqDocReserve.doc.name === newDocReserve.doc.name) {
 
                     socket.emit('reserveRes', {
-                        IdocReserve: IdocReserve , 
-                        message: 'Reserva denegada. El ' + IdocReserve.docId + ' está reservado por: ' + IdocReserve.userOwner.alias + ' [' + IdocReserve.userOwner.IP + ']'
+                        resDocName: newDocReserve.doc.name,
+                        message: 'Reserva denegada. El ' + newDocReserve.doc.name + ' está reservado por: ' + newUser.alias + ' [' + newUser.IP + ']'
                     });
 
-                    console.log('Reserva denegada. El ' + IdocReserve.docId + ' está reservado por: ' + IdocReserve.userOwner.alias + ' [' + IdocReserve.userOwner.IP + ']');
+                    console.log('Reserva denegada. El ' + newDocReserve.doc.name + ' está reservado por: ' + newUser.alias + ' [' + newUser.IP + ']');
 
                     return;
                 }
+                newDocReserve.doc.name = ReqDocReserve.doc.name;
+                newDocReserve.doc.owner = { newUser };
+                newDocReserve.doc.reqState = ReqDocReserve.doc.reqState;
 
-                IdocReserve = {
-                    docId: docReserve.docId,
-                    userOwner: user,
-                    reqState: IdocState.reserved
-                };
- 
+
                 io.emit('reserveRes', {
-                    IdocReserve: IdocReserve , 
-                    message: 'Reserva apectada: ' + docName + '. Para: ' + IdocReserve.userOwner.alias + ' [' + IdocReserve.userOwner.IP + ']'
+                    resDocState: newDocReserve.reqState.reserved,
+                    message: 'Reserva apectada: ' + docName + '. Para: ' + newDocReserve.doc.owner.userAlias + ' [' + newDocReserve.doc.owner.userIP + ']'
                 });
 
-                console.log('Reserva apectada: ' + docName + ' Para: ' + IdocReserve.userOwner.alias + ' [' + IdocReserve.userOwner.IP + ']');
+                console.log('Reserva apectada: ' + docName + ' Para: ' + newDocReserve.doc.owner.userAlias + ' [' + newDocReserve.doc.owner.userIP + ']');
 
             }
         });
@@ -88,27 +88,25 @@ export default function initSocket(serverSocket) {
 
 
 
-        socket.on('releaseDoc', (docReserve) => {
 
-            if (docReserve.reqState === IdocState.released && IdocReserve.docId === docReserve.docId && IdocReserve.userOwner.IP === user.IP) {
+        socket.on('releaseDoc', (ReqDocRelease) => {
 
-                const docName = IdocReserve.docId.split('.')[0];
- 
-  
-                    IdocReserve.reqState = IdocState.released ;
-              
+            if (ReqDocRelease.reqState === newDocReserve.reqState.released &&
+                ReqDocRelease.doc.name === newDocReserve.doc.name &&
+                ReqDocRelease.user.IP === newDocReserve.doc.owner.IP) {
+
+                const docName = ReqDocRelease.doc.name.split('.')[0];
+
+                newDocReserve.doc.name = "";
+                newDocReserve.doc.owner = {};
+                newDocReserve.doc.reqState = ReqDocRelease.doc.reqState;
 
                 io.emit('reserveRes', {
-                    IdocReserve: IdocReserve , 
-                    message: 'Reserva liberada: ' + docName + '. Por: ' + user.alias + ' [' + user.IP + ']'
+                    resDocState: newDocReserve.reqState.released,
+                    message: 'Reserva liberada: ' + docName + '. Por: ' + ReqDocRelease.user.alias + ' [' + ReqDocRelease.user.IP + ']'
                 });
-                IdocReserve = { 
-                    docId: "", 
-                    userOwner: {}, 
-                    reqState: IdocState.released 
-                };
-                console.log('Reserva liberada: ' + docName + '. Por: ' + user.alias + ' [' + user.IP + ']');
 
+                console.log('Reserva liberada: ' + docName + '. Por: ' + user.alias + ' [' + user.IP + ']');
 
             }
 
@@ -118,14 +116,14 @@ export default function initSocket(serverSocket) {
 
         socket.on("disconnect", () => {
 
-            console.log('disconnect', user.IP);
+            console.log('disconnect', newUser.IP);
             console.log('disconnect', usersOn);
-            const index = usersOn.findIndex(u => u.IP === user.IP);
+            const index = usersOn.findIndex(u => u.userIP === newUser.IP);
             console.log('index', index);
 
             if (index !== -1) {
                 usersOn.splice(index, 1);
-                io.emit("comment", user.alias + ' se ha desconectado');
+                io.emit("comment", newUser.alias + ' se ha desconectado');
                 io.emit('users', usersOn);
                 console.log('usuarios conectados', usersOn?.length);
             }

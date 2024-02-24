@@ -1,0 +1,16 @@
+{
+    "doc": {
+        "name": "", 
+        "owner": {}, 
+        "reqState": {
+            "required": "required",
+            "reserved": "reserved",
+            "released": "released"
+        }
+    },
+    "user": {
+        "IP": "",
+        "alias": "",
+        "socketID": ""
+    }
+}
