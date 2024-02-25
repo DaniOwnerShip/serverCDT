@@ -1,0 +1,144 @@
+[
+    {
+        "handshake": {
+            "tittle": "Cambio de Turno",
+            "fileID": "",
+            "party": [
+                {
+                    "type": "",
+                    "leader": "",
+                    "number": 0
+                },
+                {
+                    "type": "",
+                    "leader": "",
+                    "number": 0
+                }
+            ]
+        }
+    },
+    {
+        "blocksAreas": [
+            {
+                "areaName": "Seguridad",
+                "units": "ESTADO",
+                "areaItems": [
+                    {
+                        "desc": "Eventos de seguridad reportados dentro del turno",
+                        "state": {
+                            "coments": "",
+                            "isOk": [
+                                false
+                            ]
+                        }
+                    },
+                    {
+                        "desc": "Eventos de seguridad reportados dentro del turno",
+                        "state": [
+                            false
+                        ],
+                        "coments": ""
+                    },
+                    {
+                        "desc": "Nuevos descargos abiertos o cerrados",
+                        "state": [
+                            false
+                        ],
+                        "coments": ""
+                    },
+                    {
+                        "desc": "Alarmas del Sistema PCI/ incidencias camión bomberos",
+                        "state": [
+                            false
+                        ],
+                        "coments": ""
+                    },
+                    {
+                        "desc": "Cumplido Objetivo de SWO's planificadas para el turno",
+                        "state": [
+                            false
+                        ],
+                        "coments": ""
+                    },
+                    {
+                        "desc": "Comentario de seguridad del día (DJP de trabajos del día, Yellow, Red, Blue o Green bulletins)",
+                        "state": [
+                            false
+                        ],
+                        "coments": ""
+                    }
+                ]
+            },
+            {
+                "areaName": "Producción",
+                "units": "PTE1 | PTE2",
+                "areaItems": [
+                    {
+                        "desc": "Logs Máximo creados en el turno. Reporte por excepción",
+                        "state": [
+                            false,
+                            false
+                        ],
+                        "coments": ""
+                    },
+                    {
+                        "desc": "Desviaciones de operación durante el turno y reportado en POD",
+                        "state": [
+                            false,
+                            false
+                        ],
+                        "coments": ""
+                    },
+                    {
+                        "desc": "EFOR Off-Spect abiertos en el turno",
+                        "state": [
+                            false,
+                            false
+                        ],
+                        "coments": ""
+                    },
+                    {
+                        "desc": "Nuevos TOI/TMOD's creados o return to normal",
+                        "state": [
+                            false,
+                            false
+                        ],
+                        "coments": ""
+                    },
+                    {
+                        "desc": "Equipos forzados incluidos en TOI's / TMOD",
+                        "state": [
+                            false,
+                            false
+                        ],
+                        "coments": ""
+                    },
+                    {
+                        "desc": "IOW UNSAT: comentado en cambio de turno y reporte en LOG",
+                        "state": [
+                            false,
+                            false
+                        ],
+                        "coments": ""
+                    },
+                    {
+                        "desc": "Programación / ajuste mercado enviado",
+                        "state": [
+                            false,
+                            false
+                        ],
+                        "coments": ""
+                    },
+                    {
+                        "desc": "Datos en GADS",
+                        "state": [
+                            false,
+                            false
+                        ],
+                        "coments": ""
+                    }
+                ]
+            }
+        ]
+    }
+]
