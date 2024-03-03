@@ -2,6 +2,7 @@
     {
         "handshake": {
             "tittle": "Cambio de Turno",
+            "isComplete": true,
             "fileID": "",
             "party": [
                 {

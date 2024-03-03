@@ -10,50 +10,20 @@ import { reportValidation } from '../validations.mjs';
 
 const router = Router();
 
+ 
 
 
-// function getPathJson(fileName) {
-//   let routepath;
-
-//   switch (fileName) {
-//     case 'informe-last.json':
-//       routepath = 'informes/informesJSON/main/last';
-//       return routepath;
-//     case 'informeU1-last.json':
-//       routepath = 'informes/informesJSON/unit1/last';
-//       return routepath;
-//     case 'informeU2-last.json':
-//       routepath = 'informes/informesJSON/unit2/last';
-//       return routepath;
-//   }
-
-//   const prefFileName = fileName.split('-')[0];
-//   switch (prefFileName) {
-//     case 'informe':
-//       routepath = 'informes/informesJSON/main';
-//       return routepath;
-//     case 'informeU1':
-//       routepath = 'informes/informesJSON/unit1';
-//       return routepath;
-//     case 'informeU2':
-//       routepath = 'informes/informesJSON/unit2';
-//       return routepath;
-//   }
-// }
-
-
-router.post('/downloadjsonObj', async (req, res) => {
+router.get('/downloadjson', async (req, res) => {
 
   try {
 
-    const fileObj = req.body;
-    const bodySize = JSON.stringify(req.body).length;
-    const routepath = `informes/informesJSON/${fileObj.place}`;
-    const fileName = `${fileObj.file}-${fileObj.place}-${fileObj.date}${fileObj.type}`; 
-
+    const { fileName } = req.query;
+    const fns = fileName.split('-');
+    const place = fns[1].replace('.json', '');
     const acceptfile = req.get('accept');
+    const routepath = `informes/informesJSON/${place}`;
 
-    if (!fileObj || !acceptfile.includes('application/json') || !fileObj.file.includes('informe') || bodySize > 90) {
+    if (!fileName || !acceptfile.includes('application/json') || !fileName.includes('informe') || fileName.length > 25) {
       res.status(400).json('Nombre de archivo erróneo');
       return;
     }
@@ -84,48 +54,10 @@ router.post('/downloadjsonObj', async (req, res) => {
 
 
 
-// router.get('/downloadjson', async (req, res) => {
-
-//   try {
-
-//     const { fileName } = req.query;
-//     const acceptfile = req.get('accept');
-//     const routepath = getPathJson(fileName);
-
-//     if (!fileName || !acceptfile.includes('application/json') || !fileName.includes('informe') || fileName.length > 20) {
-//       res.status(400).json('Nombre de archivo erróneo');
-//       return;
-//     }
-
-//     const filePath = path.join(process.cwd(), routepath, fileName);
-
-//     if (!fs.existsSync(filePath)) {
-//       res.status(400).json('Archivo no encontrado');
-//       return;
-//     }
-
-//     const file = fs.readFileSync(filePath, 'utf-8');
-
-//     res.status(200).json(JSON.parse(file));
-
-//   }
-
-//   catch (e) {
-//     console.error(e.message);
-//     res.status(500).json(e.message);
-//   }
-
-// });
-
-
-
-
-
-
-
 router.post('/saveJson', async (req, res) => {
 
   const report = req.body;
+  // console.log("saveJson req", req.headers.origin);
 
   const validation = reportValidation(report);
   if (typeof (validation) === 'object' && validation !== null) {
@@ -148,7 +80,7 @@ router.post('/saveJson', async (req, res) => {
     fs.writeFileSync(lastReportPath, JSON.stringify(report, null, 2), 'utf-8');
 
     res.status(200).json(`Archivo guardado correctamente.\n\n ${fileName}`);
-    console.log("report", `Archivo guardado correctamente.\n\n ${fileName}`);
+    console.log("saveJson", `Archivo guardado correctamente.\n\n ${fileName}`);
 
   } 
   

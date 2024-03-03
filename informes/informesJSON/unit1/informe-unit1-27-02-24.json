@@ -1,7 +1,7 @@
 [
   {
     "handshake": {
-      "fileID": "informe-unit1-28-02-24.json",
+      "fileID": "informe-unit1-27-02-24.json",
       "isComplete": true,
       "tittle": "Cambio de Turno",
       "party": [
@@ -37,7 +37,7 @@
             "state": [
               true
             ],
-            "comments": "informe 28 de febrero "
+            "comments": "informe 27 de febrero "
           },
           {
             "desc": "Nuevos descargos abiertos o cerrados",

@@ -1,7 +1,7 @@
 [
   {
     "handshake": {
-      "fileID": "informe-main1-02-03-24.json",
+      "fileID": "informe-main1-27-02-24.json",
       "isComplete": true,
       "tittle": "Cambio de Turno",
       "party": [
@@ -37,33 +37,33 @@
             "state": [
               true
             ],
-            "comments": "informe 3 de marzo\n"
+            "comments": "informe 27 febrero\nglobal state\n"
           },
           {
             "desc": "Nuevos descargos abiertos o cerrados",
             "state": [
-              false
+              true
             ],
             "comments": "prueba reserva"
           },
           {
             "desc": "Alarmas del Sistema PCI/ incidencias camión bomberos",
             "state": [
-              false
+              true
             ],
             "comments": "guardar json"
           },
           {
             "desc": "Cumplido Objetivo de SWO's planificadas para el turno",
             "state": [
-              false
+              true
             ],
             "comments": "imprimir pdf\nasdfsdf\nadf\nadsf"
           },
           {
             "desc": "Comentario de seguridad del día (DJP de trabajos del día, Yellow, Red, Blue o Green bulletins)",
             "state": [
-              false
+              true
             ],
             "comments": "prueba middlewares"
           }
@@ -727,78 +727,6 @@
             "desc": "Logs Máximo creados en el turno. Reporte por excepción",
             "state": [
               false,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Desviaciones de operación durante el turno y reportado en POD",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios",
-            "coments": "comentario test"
-          },
-          {
-            "desc": "EFOR Off-Spect abiertos en el turno",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Nuevos TOI/TMOD's creados o return to normal",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Equipos forzados incluidos en TOI's / TMOD",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "IOW UNSAT: comentado en cambio de turno y reporte en LOG",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Programación / ajuste mercado enviado",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Datos en GADS",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          }
-        ]
-      },
-      {
-        "areaName": "Producción",
-        "units": "PTE1 | PTE2",
-        "urlImages": [],
-        "areaItems": [
-          {
-            "desc": "Logs Máximo creados en el turno. Reporte por excepción",
-            "state": [
-              false,
               true
             ],
             "comments": "comentarios"
@@ -1014,7 +942,79 @@
           {
             "desc": "Logs Máximo creados en el turno. Reporte por excepción",
             "state": [
+              false,
+              true
+            ],
+            "comments": "comentarios"
+          },
+          {
+            "desc": "Desviaciones de operación durante el turno y reportado en POD",
+            "state": [
               true,
+              true
+            ],
+            "comments": "comentarios",
+            "coments": "comentario test"
+          },
+          {
+            "desc": "EFOR Off-Spect abiertos en el turno",
+            "state": [
+              true,
+              false
+            ],
+            "comments": "comentarios"
+          },
+          {
+            "desc": "Nuevos TOI/TMOD's creados o return to normal",
+            "state": [
+              false,
+              true
+            ],
+            "comments": "comentarios"
+          },
+          {
+            "desc": "Equipos forzados incluidos en TOI's / TMOD",
+            "state": [
+              true,
+              false
+            ],
+            "comments": "comentarios"
+          },
+          {
+            "desc": "IOW UNSAT: comentado en cambio de turno y reporte en LOG",
+            "state": [
+              false,
+              true
+            ],
+            "comments": "comentarios"
+          },
+          {
+            "desc": "Programación / ajuste mercado enviado",
+            "state": [
+              true,
+              true
+            ],
+            "comments": "comentarios"
+          },
+          {
+            "desc": "Datos en GADS",
+            "state": [
+              true,
+              true
+            ],
+            "comments": "comentarios"
+          }
+        ]
+      },
+      {
+        "areaName": "Producción",
+        "units": "PTE1 | PTE2",
+        "urlImages": [],
+        "areaItems": [
+          {
+            "desc": "Logs Máximo creados en el turno. Reporte por excepción",
+            "state": [
+              false,
               true
             ],
             "comments": "comentarios"
@@ -1063,8 +1063,8 @@
           {
             "desc": "Programación / ajuste mercado enviado",
             "state": [
-              true,
-              true
+              false,
+              false
             ],
             "comments": "comentarios"
           },
@@ -1072,7 +1072,7 @@
             "desc": "Datos en GADS",
             "state": [
               false,
-              true
+              false
             ],
             "comments": "comentarios"
           }

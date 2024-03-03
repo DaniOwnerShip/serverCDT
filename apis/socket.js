@@ -1,113 +1,121 @@
-import docReserve from "../docReserve.json" assert { type: "json" };   
 
 
-const newDocReserve = { ...docReserve };
 
 
-// pend. validaciones !!
+// pend. validaciones 
 
 export default function initSocket(serverSocket) {
 
     let usersOn = [];
 
+    let docReservesStack = [];
+
+    const comment = {
+        user: "",
+        msg: ""
+    }
+
     const io = serverSocket;
 
     io.on("connection", (socket) => {
-
 
         console.log('connection:');
 
         const userIP = socket.handshake.address;
         const userAlias = socket.handshake.query.userAlias;
-        const soketID = socket.id;
+        const socketID = socket.id;
 
-        const newUser = {
+        const user = {
             IP: userIP,
             alias: userAlias,
-            socketID: soketID
+            socketID: socketID,
+            reserveIndex: -1
         }
- 
-        usersOn.push({ userIP, userAlias });  
 
-        io.emit('users', usersOn);
- 
-        socket.emit('connectRes', {
-            user: newUser,
-            message: 'Conexión establecida como:  ' + newUser.alias + ' [' + newUser.IP + ']'
-        });
+        usersOn.push({ userIP, userAlias });
+
+        io.emit('usersOn', usersOn);
+
+        console.log('usersOn:', { userIP, userAlias });
+        console.log('usuarios conectados', usersOn.length);
+
 
         if (usersOn.length >= 1) {
-            socket.broadcast.emit("comment", newUser.alias + ' se ha conectado');
+            comment.user = user.alias;
+            comment.msg = 'Conectado';
+            socket.broadcast.emit("comment", comment);
+            // socket.broadcast.emit('usersOn', usersOn);
         }
 
-        console.log('usuario conectado', newUser.alias + ' se ha conectado');
+        console.log('usuario conectado', user.alias + ' se ha conectado');
 
-        socket.on('comment', (comment) => {
-            io.emit('comment', newUser.alias + ' -> ' + comment);
+
+        socket.on('comment', (comment) => { 
+            io.emit('comment', { ...comment, user: user.alias });
+        });
+
+
+        socket.on('docReserveReq', (_docName) => {
+
+            const indexReserve = docReservesStack?.findIndex(reserve => reserve.docName === _docName);
+
+            if (indexReserve !== -1) {
+                const reserve = docReservesStack[indexReserve];
+                socket.emit('docReserveRes', {
+                    succes: false,
+                    message: 'Reserva denegada. El ' + reserve.docName + ' está reservado por: ' + reserve.owner.alias
+                });
+                console.log('Reserva denegada. El ' + reserve.docName + ' está reservado por: ' + reserve.owner.alias);
+                return;
+            }
+
+            const resIndex = docReservesStack.length;
+
+            user.reserveIndex = resIndex;
+
+            docReservesStack.push({ docName: _docName, owner: user });
+ 
+            socket.emit('docReserveRes', {
+                succes: true,
+                message: ''
+            });
+
+            comment.user = user.alias;
+            comment.msg = 'Reserva apectada: ' + _docName;  
+
+            io.emit('comment', comment);comment
+
+            console.log(comment);
         });
 
 
 
+        socket.on('releaseDocReq', (_docName) => {
 
+            if (user.reserveIndex === -1) { return; }
 
-        socket.on('reserveReq', (ReqDocReserve) => {
+            const reserve = docReservesStack[user.reserveIndex];
 
-            const docName = ReqDocReserve.docId.split('.')[0];
+            if (reserve.docName === _docName && reserve.owner === user) {
 
-            console.log('reserveReq', ReqDocReserve);
+                comment.user = reserve.owner.alias;
+                comment.msg = 'Reserva liberada: ' + _docName; 
+                io.emit('comment', comment);
+                console.log(comment);
 
-            if (ReqDocReserve.reqState === newDocReserve.reqState.reserved) {
+                docReservesStack.splice(user.reserveIndex, 1);
+                user.reserveIndex = -1;
 
-                if (ReqDocReserve.doc.name === newDocReserve.doc.name) {
-
-                    socket.emit('reserveRes', {
-                        resDocName: newDocReserve.doc.name,
-                        message: 'Reserva denegada. El ' + newDocReserve.doc.name + ' está reservado por: ' + newUser.alias + ' [' + newUser.IP + ']'
-                    });
-
-                    console.log('Reserva denegada. El ' + newDocReserve.doc.name + ' está reservado por: ' + newUser.alias + ' [' + newUser.IP + ']');
-
-                    return;
-                }
-                newDocReserve.doc.name = ReqDocReserve.doc.name;
-                newDocReserve.doc.owner = { newUser };
-                newDocReserve.doc.reqState = ReqDocReserve.doc.reqState;
-
-
-                io.emit('reserveRes', {
-                    resDocState: newDocReserve.reqState.reserved,
-                    message: 'Reserva apectada: ' + docName + '. Para: ' + newDocReserve.doc.owner.userAlias + ' [' + newDocReserve.doc.owner.userIP + ']'
+                socket.emit('releaseDocRes', {
+                    succes: true,
+                    message: ''
                 });
-
-                console.log('Reserva apectada: ' + docName + ' Para: ' + newDocReserve.doc.owner.userAlias + ' [' + newDocReserve.doc.owner.userIP + ']');
 
             }
-        });
-
-
-
-
-
-
-        socket.on('releaseDoc', (ReqDocRelease) => {
-
-            if (ReqDocRelease.reqState === newDocReserve.reqState.released &&
-                ReqDocRelease.doc.name === newDocReserve.doc.name &&
-                ReqDocRelease.user.IP === newDocReserve.doc.owner.IP) {
-
-                const docName = ReqDocRelease.doc.name.split('.')[0];
-
-                newDocReserve.doc.name = "";
-                newDocReserve.doc.owner = {};
-                newDocReserve.doc.reqState = ReqDocRelease.doc.reqState;
-
-                io.emit('reserveRes', {
-                    resDocState: newDocReserve.reqState.released,
-                    message: 'Reserva liberada: ' + docName + '. Por: ' + ReqDocRelease.user.alias + ' [' + ReqDocRelease.user.IP + ']'
+            else {
+                socket.emit('releaseDocRes', {
+                    message: 'algo no salió bien'
                 });
-
-                console.log('Reserva liberada: ' + docName + '. Por: ' + user.alias + ' [' + user.IP + ']');
-
             }
 
         });
@@ -116,16 +124,33 @@ export default function initSocket(serverSocket) {
 
         socket.on("disconnect", () => {
 
-            console.log('disconnect', newUser.IP);
-            console.log('disconnect', usersOn);
-            const index = usersOn.findIndex(u => u.userIP === newUser.IP);
-            console.log('index', index);
+            console.log('disconnect', user);
+
+            const index = usersOn.findIndex(u => u.userIP === user.IP);
 
             if (index !== -1) {
                 usersOn.splice(index, 1);
-                io.emit("comment", newUser.alias + ' se ha desconectado');
-                io.emit('users', usersOn);
-                console.log('usuarios conectados', usersOn?.length);
+                comment.user = user.alias;
+                comment.msg = 'Desconectado';
+                io.emit("comment", comment);
+                io.emit('usersOn', usersOn);
+                console.log('usuarios conectados', usersOn.length);
+            }
+
+            const userRes = user.reserveIndex;
+            if (userRes !== -1) {
+                if (userRes.owner !== user) {
+                    comment.user = user.alias;
+                    comment.msg = 'FATAL ERROR!';
+                    io.emit('comment', comment);
+                    return;
+                }
+                comment.user = reserve.owner.alias;
+                comment.msg = 'Reserva liberada por desconexión ' + _docName;
+                const reserve = docReservesStack[userRes];
+                docReservesStack.splice(userRes, 1);
+                io.emit('comment', comment);
+                console.log(comment);
             }
 
         });

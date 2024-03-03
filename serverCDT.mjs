@@ -58,9 +58,7 @@ app.prepare().then(() => {
     cors: corsOptions
   });
 
-  initSocket(serverSocket);
- 
-
+  initSocket(serverSocket);  
 
   serverExpress.all('*', (req, res) => {
     return handle(req, res);
