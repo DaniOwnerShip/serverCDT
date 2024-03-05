@@ -122,36 +122,39 @@ export default function initSocket(serverSocket) {
 
 
 
-        socket.on("disconnect", () => {
+        socket.on("disconnect", () => { 
 
-            console.log('disconnect', user);
+            const index = usersOn.findIndex(u => u.userIP === user.IP);  
+            const userRes = user.reserveIndex;  
 
-            const index = usersOn.findIndex(u => u.userIP === user.IP);
+            if (userRes !== -1) {
+                const reserve = docReservesStack[userRes]; 
 
-            if (index !== -1) {
+                if (reserve.owner !== user) {
+                    comment.user = user.alias;
+                    comment.msg = 'FATAL ERROR!';
+                    io.emit('comment', comment);
+                    console.log('FATAL ERROR!');
+                    return;
+                } 
+                comment.user = reserve.owner.alias;
+                comment.msg = 'Reserva liberada por desconexión ' + reserve.docName;
+                docReservesStack.splice(userRes, 1);
+                io.emit('comment', comment);
+                console.log(comment);
+            }
+            
+
+            if (index !== -1) { 
                 usersOn.splice(index, 1);
                 comment.user = user.alias;
                 comment.msg = 'Desconectado';
                 io.emit("comment", comment);
                 io.emit('usersOn', usersOn);
+                console.log(comment);
                 console.log('usuarios conectados', usersOn.length);
             }
 
-            const userRes = user.reserveIndex;
-            if (userRes !== -1) {
-                if (userRes.owner !== user) {
-                    comment.user = user.alias;
-                    comment.msg = 'FATAL ERROR!';
-                    io.emit('comment', comment);
-                    return;
-                }
-                comment.user = reserve.owner.alias;
-                comment.msg = 'Reserva liberada por desconexión ' + _docName;
-                const reserve = docReservesStack[userRes];
-                docReservesStack.splice(userRes, 1);
-                io.emit('comment', comment);
-                console.log(comment);
-            }
 
         });
 
