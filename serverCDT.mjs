@@ -32,8 +32,11 @@ app.prepare().then(() => {
 
   const serverExpress = express(); 
 
-  serverExpress.use(function (req, res, next) {
-    res.setHeader('Access-Control-Expose-Headers', 'Content-Disposition, Content-Type');
+  serverExpress.use(function (req, res, next) { 
+    // res.setHeader('Access-Control-Allow-Headers', 'ETag, pruebax'); 
+    res.setHeader('Access-Control-Expose-Headers', 'ETag, pruebax');    
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    // res.setHeader('pruebax', '12345'); 
     next();
   });  
 
@@ -49,6 +52,7 @@ app.prepare().then(() => {
   serverExpress.use((err, _req, res, next) => {
     console.error(err.stack);
     res.status(500).send(`Server Error ${err}`);
+    next();
   })
 
 

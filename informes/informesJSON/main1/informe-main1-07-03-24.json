@@ -1,7 +1,7 @@
 [
   {
     "handshake": {
-      "fileID": "informe-main1-08-03-24.json",
+      "fileID": "informe-main1-07-03-24.json",
       "isComplete": true,
       "tittle": "Cambio de Turno",
       "party": [
@@ -63,7 +63,7 @@
           {
             "desc": "Comentario de seguridad del día (DJP de trabajos del día, Yellow, Red, Blue o Green bulletins)",
             "state": [
-              false
+              true
             ],
             "comments": "prueba middlewares"
           }

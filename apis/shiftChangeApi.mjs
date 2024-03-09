@@ -10,7 +10,7 @@ import { reportValidation } from '../validations.mjs';
 
 const router = Router();
 
- 
+
 
 
 router.get('/downloadjson', async (req, res) => {
@@ -28,19 +28,24 @@ router.get('/downloadjson', async (req, res) => {
       return;
     }
 
-    const filePath = path.join(process.cwd(), routepath, fileName);
+    const filePath = path.join(process.cwd(), routepath, fileName); 
 
-    if (!fs.existsSync(filePath)) {
-      res.status(400).json('Archivo no encontrado');
-      return;
-    }
+    fs.stat(filePath, (err, stats) => {
 
-    const file = fs.readFileSync(filePath, 'utf-8');
+      if (err) throw err;
+ 
+      const lm = stats.mtime.toUTCString();  
+      const localDate = new Date(lm).toLocaleString(); 
+      res.setHeader('Last-Modified', localDate);
+ 
+      fs.readFile(filePath, 'utf-8', (err, data) => {
+        if (err) throw err;
+        res.status(200).json(JSON.parse(data));
+      });
 
-    res.status(200).json(JSON.parse(file));
+    });
 
-  }
-
+  } 
   catch (e) {
     console.error(e.message);
     res.status(500).json(e.message);
@@ -71,7 +76,7 @@ router.post('/saveJson', async (req, res) => {
     const fileName = report[0].handshake.fileID;
     const place = fileName.split('-')[1];
 
-    const routepath = `informes/informesJSON/${place}`; 
+    const routepath = `informes/informesJSON/${place}`;
 
     const reportsPath = path.join(process.cwd(), routepath, fileName);
     const lastReportPath = path.join(process.cwd(), routepath, `/informe-${place}-last.json`);
@@ -82,8 +87,8 @@ router.post('/saveJson', async (req, res) => {
     res.status(200).json(`Archivo guardado correctamente.\n\n ${fileName}`);
     console.log("saveJson", `Archivo guardado correctamente.\n\n ${fileName}`);
 
-  } 
-  
+  }
+
   catch (e) {
     console.error(e.message);
     res.sendStatus(500);
@@ -101,7 +106,7 @@ router.post('/saveJson', async (req, res) => {
 
 //   const { fileId } = req.query;
 //   console.log("download-pdf", fileId); 
-  
+
 //   try {
 
 //     const dateNow = new Date();
