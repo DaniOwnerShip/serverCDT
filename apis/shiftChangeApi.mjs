@@ -231,6 +231,49 @@ router.post('/uploadvideo', (req, res) => {
 
 
 
+const audioMimes = [
+  'audio/mpeg',        // .mp3
+  'audio/wav',         // .wav
+  'audio/x-ms-wma',    // .wma
+  'audio/vnd.rn-realaudio', // .ra, .ram
+  'audio/ogg',         // .ogg
+  'audio/aac',         // .aac
+  'audio/flac',        // .flac
+  'audio/x-matroska',  // .mka
+  'audio/x-aiff',      // .aif, .aiff
+  'audio/midi',        // .mid, .midi
+  'audio/x-ms-asf'     // .asf
+];
+
+router.post('/uploadaudio', (req, res) => {
+  // Aquí puedes acceder al archivo subido a través de req.file
+  const audio = req.files.audio;
+  console.log("audio", audio);
+
+  if (!req.files || Object.keys(req.files).length === 0 || !/^audio/.test(audio.mimetype) || !audioMimes.includes(audio.mimetype)) {
+    return res.sendStatus(400);
+  }
+
+  const safeFilename = sanitizeFilename(audio.name);
+  const uniqueFilename = Date.now() + '_' + safeFilename;
+  const uploadPath = path.join(process.cwd(), 'public/audio', uniqueFilename);
+
+  console.log("uploadPath", uniqueFilename);
+
+  audio.mv(uploadPath, (err) => {
+
+    if (err) {
+      console.log("upload-audio err", err.message);
+      return res.sendStatus(500);
+    }
+
+    const audioUrl = `/public/video/${uniqueFilename}`;
+    res.status(200).json(audioUrl);
+
+  });
+
+});
+
 
 
 router.get('/delete-file', async (req, res) => {

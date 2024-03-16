@@ -31,6 +31,9 @@
           "http://localhost:3001//public/video/1707057549449_Test.py - Visual Studio Code 2023-04-28 17-24-26.mp4",
           "http://localhost:3001//public/video/1707176670192_Test.py - Visual Studio Code 2023-04-28 17-11-32.mp4"
         ],
+        "urlAudios": [ 
+          "http://localhost:3001//public/audio/making-of-cyborg.mp3"
+        ],
         "areaItems": [
           {
             "desc": "Eventos de seguridad reportados dentro del turno",
