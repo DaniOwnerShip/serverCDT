@@ -6,7 +6,7 @@ import rateLimit from 'express-rate-limit';
 
 
 export const jsonParser = bodyParser.json({
-  limit: '100kb'
+  limit: '100kb' // 100kb
 });
 
 export const urlencodedParser = bodyParser.urlencoded({
@@ -22,7 +22,7 @@ export const connLimit = rateLimit({
 });
 
 export const fileLimiter = fileUpload({
-  limits: { fileSize: 50 * (1024 ** 2) },      // 50 megas
+  limits: { fileSize: 300 * (1024 ** 2) },      // 50 megas
   // limits: { fileSize: 10 },
   abortOnLimit: true,
 });

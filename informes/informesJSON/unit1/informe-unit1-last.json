@@ -1,9 +1,16 @@
 [
   {
-    "handshake": {
-      "fileID": "informe-unit1-28-02-24.json",
-      "isComplete": true,
+    "metaData": {
+      "fileID": "informe-unit1-21-03-24.json",
       "tittle": "Cambio de Turno",
+      "place": "🏭 Termosol1",
+      "DayNight": "Día",
+      "isComplete": true,
+      "lastEdit": "fromServer"
+    }
+  },
+  {
+    "handshake": {
       "party": [
         {
           "type": "Turno Entrante",
@@ -37,7 +44,7 @@
             "state": [
               true
             ],
-            "comments": "informe 28 de febrero "
+            "comments": "t1 prueba 21 marzo"
           },
           {
             "desc": "Nuevos descargos abiertos o cerrados",

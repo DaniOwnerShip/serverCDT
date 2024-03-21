@@ -5,9 +5,15 @@ export function reportValidation(data) {
  
     try {
  
-        const handshakeSchema = z.object({
+        //añadir  resto de campos una vez definidos 
+        const metadataSchema = z.object({
             fileID: z.string().length(27),
-            tittle: z.string().includes("Cambio de Turno").length(15),
+            tittle: z.string().includes("Cambio de Turno").length(15)
+        });
+
+        metadataSchema.parse(data[0].metaData);
+
+        const handshakeSchema = z.object({  
             party: z.array(
                 z.object({
                     type: z.string(),
@@ -17,8 +23,9 @@ export function reportValidation(data) {
             ),
         });
 
-        handshakeSchema.parse(data[0].handshake);
- 
+        handshakeSchema.parse(data[1].handshake);
+        
+ //añadir resto de archivos multimedias. el tamaño ya está en el middleware..
         const areaSchema = z.object({
             areaName: z.string(),
             units: z.string(),
@@ -30,7 +37,7 @@ export function reportValidation(data) {
             }))
         });
 
-        data[1].areas.forEach((area) => {
+        data[2].areas.forEach((area) => {
             areaSchema.parse(area);
         });
 

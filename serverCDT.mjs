@@ -4,7 +4,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import * as middelware from './middlewares.mjs';
-import shiftChange from './apis/shiftChangeApi.mjs';
+import jsonFilesAPI from './apis/jsonFilesAPI.mjs';
+import multimediaAPI from './apis/multimediaAPI.mjs';
 import http from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
@@ -23,7 +24,7 @@ const handle = app.getRequestHandler();
 
 // REV
 const corsOptions = {
-  origin: ["http://localhost:3000", "http://127.0.0.1:3000", "http://192.168.1.255:3000", "http://192.168.1.2:3000", "http://192.168.1.1:3000", "http://192.168.1.101:3000", "http://192.168.1.100:3000", "http://192.168.56.1:3000", "http://192.168.1.103:3000", "http://127.0.0.1:3001"],
+  origin: ["http://localhost:3001","http://localhost:3000", "http://127.0.0.1:3000", "http://192.168.1.255:3000", "http://192.168.1.2:3000", "http://192.168.1.1:3000", "http://192.168.1.101:3000", "http://192.168.1.100:3000", "http://192.168.56.1:3000", "http://192.168.1.103:3000", "http://127.0.0.1:3001"],
   credentials: true
 };
 
@@ -46,7 +47,8 @@ app.prepare().then(() => {
   serverExpress.use(middelware.jsonParser);
   serverExpress.use(middelware.urlencodedParser);
   serverExpress.use(express.json());
-  serverExpress.use('/apiHs', shiftChange);
+  serverExpress.use('/jsonAPI', jsonFilesAPI);
+  serverExpress.use('/multimediaAPI', multimediaAPI);
   serverExpress.use("/public", express.static(path.join(__dirname, 'public')));
 
   serverExpress.use((err, _req, res, next) => {

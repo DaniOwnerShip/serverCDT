@@ -1,9 +1,16 @@
 [
   {
-    "handshake": {
-      "fileID": "informe-main1-08-03-24.json",
-      "isComplete": true,
+    "metaData": {
+      "fileID": "informe-main1-21-03-24.json",
       "tittle": "Cambio de Turno",
+      "place": "🏛️ Termosol",
+      "DayNight": "Día",
+      "isComplete": true,
+      "lastEdit": "fromServer"
+    }
+  },
+  {
+    "handshake": {
       "party": [
         {
           "type": "Turno Entrante",
@@ -15,7 +22,8 @@
           "leader": "Jefe saliente",
           "number": "2"
         }
-      ]
+      ],
+      "fileID": "informe-main1-21-03-24.json"
     }
   },
   {
@@ -24,15 +32,12 @@
         "areaName": "Seguridad",
         "units": "Estado",
         "urlImages": [
-          "http://localhost:3001//public/images/1707175581410_Captura de pantalla 2023-04-25 135230.png",
-          "http://localhost:3001//public/images/1707175750651_Captura de pantalla 2023-04-25 165817.png"
+          "http://localhost:3001/public/image/1710865804741_Captura de pantalla 2023-05-05 011731.png",
+          "http://localhost:3001/public/image/1710865875697_Captura de pantalla 2023-05-08 183214.png"
         ],
-        "urlVideos": [
-          "http://localhost:3001//public/video/1707057549449_Test.py - Visual Studio Code 2023-04-28 17-24-26.mp4",
-          "http://localhost:3001//public/video/1707176670192_Test.py - Visual Studio Code 2023-04-28 17-11-32.mp4"
-        ],
-        "urlAudios": [ 
-          "http://localhost:3001//public/audio/making-of-cyborg.mp3"
+        "urlVideos": [],
+        "urlAudios": [
+          "http://localhost:3001/public/audio/1710842519854_making-of-cyborg.mp3"
         ],
         "areaItems": [
           {
@@ -40,7 +45,7 @@
             "state": [
               true
             ],
-            "comments": "informe 3 de marzo\n"
+            "comments": "informe 21 de marzo\n"
           },
           {
             "desc": "Nuevos descargos abiertos o cerrados",
@@ -66,7 +71,7 @@
           {
             "desc": "Comentario de seguridad del día (DJP de trabajos del día, Yellow, Red, Blue o Green bulletins)",
             "state": [
-              false
+              true
             ],
             "comments": "prueba middlewares"
           }
@@ -1035,14 +1040,14 @@
             "desc": "EFOR Off-Spect abiertos en el turno",
             "state": [
               true,
-              false
+              true
             ],
             "comments": "comentarios"
           },
           {
             "desc": "Nuevos TOI/TMOD's creados o return to normal",
             "state": [
-              false,
+              true,
               true
             ],
             "comments": "comentarios"
