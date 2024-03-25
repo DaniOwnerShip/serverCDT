@@ -50,6 +50,10 @@ export default function initSocket(serverSocket) {
         console.log('usuario ', user.alias + ' se ha conectado');
 
 
+        socket.on('userReq', () => { 
+            io.emit('usersOn', usersOn);
+        });
+
         socket.on('comment', (comment) => { 
             io.emit('comment', { ...comment, user: user.alias });
         });
