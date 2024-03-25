@@ -17,33 +17,18 @@ routerJson.get('/downloadjson', async (req, res) => {
     const place = fns[1].replace('.json', '');
     const acceptfile = req.get('accept');
     const routepath = `informes/informesJSON/${place}`;
-    console.log('fileName', fileName);
 
     if (!fileName || !acceptfile.includes('application/json') || !fileName.includes('informe') || fileName.length > 27) {
       res.status(400).json('Nombre de archivo erróneo');
       return;
     }
 
-    const pathFile = path.join(process.cwd(), routepath, fileName);
-
+    const pathFile = path.join(process.cwd(), routepath, fileName); 
     const doc = fs.readFileSync(pathFile, 'utf-8');
+
     res.status(200).json(JSON.parse(doc));
-    // fs.stat(pathFile, (err, stats) => {
 
-    //   if (err) {
-    //     console.error(`No se encontró el archivo ${fileName}`);
-    //     return res.status(400).json(`No se encontró el archivo ${fileName}`);
-    //   }
-
-    //   // const lm = stats.mtime.toUTCString();
-    //   // const localDate = new Date(lm).toLocaleString();
-    //   // res.setHeader('Last-Modified', localDate);
-
-    //   const doc = fs.readFileSync(pathFile, 'utf-8');
-    //   res.status(200).json(JSON.parse(doc));
-
-    // });
-
+    console.log('downloadjson', fileName);
 
   }
   catch (e) {
@@ -58,8 +43,7 @@ routerJson.get('/downloadjson', async (req, res) => {
 
 routerJson.post('/saveJson', async (req, res) => {
 
-  const report = req.body;
-  // console.log("saveJson req", req.headers.origin);
+  const report = req.body; 
 
   const validation = reportValidation(report);
   if (typeof (validation) === 'object' && validation !== null) {
@@ -80,7 +64,7 @@ routerJson.post('/saveJson', async (req, res) => {
     const checksum = hash.digest('hex');
     report[0].metaData.checksum = checksum;
     console.log('checksum', checksum);
-  } 
+  }
 
   try {
 
@@ -95,9 +79,8 @@ routerJson.post('/saveJson', async (req, res) => {
     fs.writeFileSync(reportsPath, JSON.stringify(report, null, 2), 'utf-8');
     fs.writeFileSync(lastReportPath, JSON.stringify(report, null, 2), 'utf-8');
 
-    res.status(200).json(`Archivo actualizado: ${fileName}`);
-    console.log("saveJson", `Archivo actualizado: ${fileName}`);
-
+    res.status(200).json(`Archivo guardado: ${fileName}`); 
+    console.log('saveJson', fileName); 
   }
 
   catch (e) {

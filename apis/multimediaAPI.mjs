@@ -85,7 +85,7 @@ routerMultimedia.post('/image', (req, res) => {
 
 });
 
-
+//rev
 routerMultimedia.post('/mediaupload', (req, res) => {
 
   const mediaFile = req.files.mediaFile;
@@ -150,7 +150,7 @@ routerMultimedia.post('/mediaupload', (req, res) => {
 
     res.status(200).json({ mediaURL: mediaURL });
 
-    console.log('nuevo video', docFileName);
+    console.log('nuevo archivo multimedia', docFileName);
 
   }
   catch (e) {
@@ -165,7 +165,6 @@ routerMultimedia.post('/mediaupload', (req, res) => {
 
 routerMultimedia.get('/mediadelete', async (req, res) => {
 
-  console.log("mediadelete");
   const docFileName = req.query.docFileName;
   const areaIndex = req.query.areaIndex;
   const mediaType = req.query.mediaType;
@@ -216,9 +215,7 @@ routerMultimedia.get('/mediadelete', async (req, res) => {
 
     mediaDocURLsStack.splice(stackIndex, 1);
     fs.writeFileSync(pathFile, JSON.stringify(docObj, null, 2), 'utf-8');
-    fs.writeFileSync(pathFileLast, JSON.stringify(docObj, null, 2), 'utf-8');
-
-
+    fs.writeFileSync(pathFileLast, JSON.stringify(docObj, null, 2), 'utf-8');  
 
     const url = new URL(mediaURL);
     const decodePath = decodeURIComponent(url.pathname);
@@ -226,46 +223,10 @@ routerMultimedia.get('/mediadelete', async (req, res) => {
 
     console.log("filePath", filePath);
     fs.unlinkSync(filePath);
-
-    // res.status(200).json("mediaURLo. url: "  )
+ 
     res.status(200).json(`${mediaType} eliminado de ${docFileName}`)
 
-  }
-
-  catch (e) {
-    console.error(e.message);
-    res.status(500).json(e.message);
-  }
-
-});
-
-
-
-
-
-
-
-
-
-routerMultimedia.get('/delete-filessss', async (req, res) => {
-
-  const { urlFile } = req.query;
-  console.log("urlFile", urlFile);
-
-  if (!urlFile) {
-    res.sendStatus(400);
-    return;
-  }
-
-  try {
-
-    const url = new URL(urlFile);
-    const decodePath = decodeURIComponent(url.pathname);
-    const filePath = path.join(__dirname, decodePath);
-
-    fs.unlinkSync(filePath);
-
-    res.status(200).json("archivo eliminado. url: " + urlFile)
+    console.log(`${mediaType} eliminado de ${docFileName}`);
 
   }
 
@@ -278,6 +239,44 @@ routerMultimedia.get('/delete-filessss', async (req, res) => {
 
 
 export default routerMultimedia;
+
+
+
+
+
+
+
+// routerMultimedia.get('/delete-filessss', async (req, res) => {
+
+//   const { urlFile } = req.query;
+//   console.log("urlFile", urlFile);
+
+//   if (!urlFile) {
+//     res.sendStatus(400);
+//     return;
+//   }
+
+//   try {
+
+//     const url = new URL(urlFile);
+//     const decodePath = decodeURIComponent(url.pathname);
+//     const filePath = path.join(__dirname, decodePath);
+
+//     fs.unlinkSync(filePath);
+
+//     res.status(200).json("archivo eliminado. url: " + urlFile)
+
+//   }
+
+//   catch (e) {
+//     console.error(e.message);
+//     res.status(500).json(e.message);
+//   }
+
+// });
+
+
+// export default routerMultimedia;
 
 
 

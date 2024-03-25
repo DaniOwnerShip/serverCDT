@@ -7,6 +7,7 @@
 export default function initSocket(serverSocket) {
 
     let usersOn = [];
+    let aliasRep = 0;
 
     let docReservesStack = [];
 
@@ -15,15 +16,20 @@ export default function initSocket(serverSocket) {
         msg: ""
     }
 
+ 
+
     const io = serverSocket;
 
     io.on("connection", (socket) => {
 
-        console.log('connection:');
-
         const userIP = socket.handshake.address;
-        const userAlias = socket.handshake.query.userAlias;
+        let userAlias = socket.handshake.query.userAlias;
         const socketID = socket.id;
+
+        if (usersOn.length > 0) {
+            const aliasExist = usersOn.findIndex(user => user.userAlias === userAlias);
+            aliasExist !== -1 ? userAlias = userAlias + ++aliasRep : null; 
+        }
 
         const user = {
             IP: userIP,
@@ -32,29 +38,26 @@ export default function initSocket(serverSocket) {
             reserveIndex: -1
         }
 
-        usersOn.push({ userIP, userAlias });
-
-        io.emit('usersOn', usersOn);
-
-        console.log('usersOn:', usersOn); 
-        console.log('usuarios conectados', usersOn.length);
-
+        usersOn.push({ userIP, userAlias }); 
 
         if (usersOn.length > 1) {
             comment.user = user.alias;
             comment.msg = 'Conectado';
             socket.broadcast.emit("comment", comment);
-            // socket.broadcast.emit('usersOn', usersOn);
-        }
-
-        console.log('usuario ', user.alias + ' se ha conectado');
-
-
-        socket.on('userReq', () => { 
             io.emit('usersOn', usersOn);
+        } 
+
+        console.log('usuarios conectados:', usersOn.length);
+        console.log(usersOn);
+
+
+
+        socket.on('userReq', () => {
+            socket.emit('usersOn', usersOn);
         });
 
-        socket.on('comment', (comment) => { 
+
+        socket.on('comment', (comment) => {
             io.emit('comment', { ...comment, user: user.alias });
         });
 
@@ -78,25 +81,23 @@ export default function initSocket(serverSocket) {
             user.reserveIndex = resIndex;
 
             docReservesStack.push({ docName: _docName, owner: user });
- 
 
             comment.user = user.alias;
-            comment.msg = 'Reserva apectada: ' + _docName;   
+            comment.msg = 'Reserva apectada: ' + _docName;
 
             socket.emit('docReserveRes', {
                 succes: true,
                 message: comment.msg
             });
-             
-            io.emit('comment', comment);  
+
+            usersOn.length > 1 ? io.emit("comment", comment) : null;
 
             console.log(comment);
         });
 
 
 
-        socket.on('releaseDocReq', (_docName) => {
-            console.log('releaseDocReq');
+        socket.on('releaseDocReq', (_docName) => { 
 
             if (user.reserveIndex === -1) { return; }
 
@@ -104,37 +105,38 @@ export default function initSocket(serverSocket) {
 
             if (reserve.docName === _docName && reserve.owner === user) {
 
-                comment.user = reserve.owner.alias;
-                comment.msg = 'Reserva liberada: ' + _docName; 
-                io.emit('comment', comment);
-                console.log(comment);
-
                 docReservesStack.splice(user.reserveIndex, 1);
                 user.reserveIndex = -1;
 
+                comment.user = reserve.owner.alias;
+                comment.msg = 'Reserva liberada: ' + _docName;
+
                 socket.emit('releaseDocRes', {
                     succes: true,
-                    message: ''
+                    message: comment.msg
                 });
+
+                usersOn.length > 1 ? io.emit("comment", comment) : null;
+
+                console.log(comment);
 
             }
             else {
-                socket.emit('releaseDocRes', {
-                    message: 'algo no salió bien'
-                });
+                socket.emit('releaseDocRes', { message: 'algo no salió bien'  });
+                console.log('releaseDocRes ERROR');
             }
 
         });
 
 
+     //rev
+        socket.on("disconnect", () => {
 
-        socket.on("disconnect", () => { 
-
-            const index = usersOn.findIndex(u => u.userIP === user.IP);  
-            const userRes = user.reserveIndex;  
+            const index = usersOn.findIndex(u => u.userIP === user.IP);
+            const userRes = user.reserveIndex;
 
             if (userRes !== -1) {
-                const reserve = docReservesStack[userRes]; 
+                const reserve = docReservesStack[userRes];
 
                 if (reserve.owner !== user) {
                     comment.user = user.alias;
@@ -142,16 +144,16 @@ export default function initSocket(serverSocket) {
                     io.emit('comment', comment);
                     console.log('FATAL ERROR!');
                     return;
-                } 
+                }
                 comment.user = reserve.owner.alias;
                 comment.msg = 'Reserva liberada por desconexión ' + reserve.docName;
                 docReservesStack.splice(userRes, 1);
                 io.emit('comment', comment);
                 console.log(comment);
             }
-            
 
-            if (index !== -1) { 
+
+            if (index !== -1) {
                 usersOn.splice(index, 1);
                 comment.user = user.alias;
                 comment.msg = 'Desconectado';
