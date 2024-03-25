@@ -5,7 +5,7 @@
       "tittle": "Cambio de Turno",
       "place": "🏭 Termosol1",
       "DayNight": "Día",
-      "isComplete": true,
+      "isComplete": false,
       "lastEdit": "fromServer"
     }
   },

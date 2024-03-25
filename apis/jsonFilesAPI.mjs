@@ -3,6 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import { reportValidation } from '../validations.mjs';
 
+import crypto from 'crypto';
 
 const routerJson = Router();
 
@@ -25,21 +26,23 @@ routerJson.get('/downloadjson', async (req, res) => {
 
     const pathFile = path.join(process.cwd(), routepath, fileName);
 
-    fs.stat(pathFile, (err, stats) => {
+    const doc = fs.readFileSync(pathFile, 'utf-8');
+    res.status(200).json(JSON.parse(doc));
+    // fs.stat(pathFile, (err, stats) => {
 
-      if (err) { 
-        console.error(`No se encontró el archivo ${fileName}`);
-        return res.status(400).json(`No se encontró el archivo ${fileName}`); 
-      }
+    //   if (err) {
+    //     console.error(`No se encontró el archivo ${fileName}`);
+    //     return res.status(400).json(`No se encontró el archivo ${fileName}`);
+    //   }
 
-      const lm = stats.mtime.toUTCString();
-      const localDate = new Date(lm).toLocaleString(); 
-      res.setHeader('Last-Modified', localDate);
+    //   // const lm = stats.mtime.toUTCString();
+    //   // const localDate = new Date(lm).toLocaleString();
+    //   // res.setHeader('Last-Modified', localDate);
 
-      const doc = fs.readFileSync(pathFile, 'utf-8'); 
-      res.status(200).json(JSON.parse(doc));
+    //   const doc = fs.readFileSync(pathFile, 'utf-8');
+    //   res.status(200).json(JSON.parse(doc));
 
-    });
+    // });
 
 
   }
@@ -66,6 +69,18 @@ routerJson.post('/saveJson', async (req, res) => {
   } else if (validation === null || validation !== 1) {
     return res.status(500).json(`Error desconocido durante la validación`);
   }
+  const localDate = new Date().toLocaleString();
+  report[0].metaData.lastEdit = localDate;
+  console.log('localDate', localDate);
+
+  if (report[0].metaData.isComplete) {
+    console.log('isComplete');
+    const hash = crypto.createHash('sha256');
+    hash.update(JSON.stringify(report));
+    const checksum = hash.digest('hex');
+    report[0].metaData.checksum = checksum;
+    console.log('checksum', checksum);
+  } 
 
   try {
 

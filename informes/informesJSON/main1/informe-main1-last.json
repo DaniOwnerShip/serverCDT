@@ -1,12 +1,13 @@
 [
   {
     "metaData": {
-      "fileID": "informe-main1-21-03-24.json",
+      "fileID": "informe-main1-24-03-24.json",
       "tittle": "Cambio de Turno",
       "place": "🏛️ Termosol",
-      "DayNight": "Día",
-      "isComplete": true,
-      "lastEdit": "fromServer"
+      "DayNight": "Noche",
+      "lastEdit": "25/3/2024, 0:17:50",
+      "isComplete": false,
+      "checksum": ""
     }
   },
   {
@@ -35,7 +36,9 @@
           "http://localhost:3001/public/image/1710865804741_Captura de pantalla 2023-05-05 011731.png",
           "http://localhost:3001/public/image/1710865875697_Captura de pantalla 2023-05-08 183214.png"
         ],
-        "urlVideos": [],
+        "urlVideos": [
+          "http://localhost:3001/public/video/1711273442805_Test.py - Visual Studio Code 2023-04-28 17-02-54.mp4"
+        ],
         "urlAudios": [
           "http://localhost:3001/public/audio/1710842519854_making-of-cyborg.mp3"
         ],
@@ -1079,7 +1082,7 @@
           {
             "desc": "Datos en GADS",
             "state": [
-              false,
+              true,
               true
             ],
             "comments": "comentarios"

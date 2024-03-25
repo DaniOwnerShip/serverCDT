@@ -36,18 +36,18 @@ export default function initSocket(serverSocket) {
 
         io.emit('usersOn', usersOn);
 
-        console.log('usersOn:', { userIP, userAlias });
+        console.log('usersOn:', usersOn); 
         console.log('usuarios conectados', usersOn.length);
 
 
-        if (usersOn.length >= 1) {
+        if (usersOn.length > 1) {
             comment.user = user.alias;
             comment.msg = 'Conectado';
             socket.broadcast.emit("comment", comment);
             // socket.broadcast.emit('usersOn', usersOn);
         }
 
-        console.log('usuario conectado', user.alias + ' se ha conectado');
+        console.log('usuario ', user.alias + ' se ha conectado');
 
 
         socket.on('comment', (comment) => { 
@@ -75,15 +75,16 @@ export default function initSocket(serverSocket) {
 
             docReservesStack.push({ docName: _docName, owner: user });
  
-            socket.emit('docReserveRes', {
-                succes: true,
-                message: ''
-            });
 
             comment.user = user.alias;
-            comment.msg = 'Reserva apectada: ' + _docName;  
+            comment.msg = 'Reserva apectada: ' + _docName;   
 
-            io.emit('comment', comment);comment
+            socket.emit('docReserveRes', {
+                succes: true,
+                message: comment.msg
+            });
+             
+            io.emit('comment', comment);  
 
             console.log(comment);
         });
@@ -91,6 +92,7 @@ export default function initSocket(serverSocket) {
 
 
         socket.on('releaseDocReq', (_docName) => {
+            console.log('releaseDocReq');
 
             if (user.reserveIndex === -1) { return; }
 
