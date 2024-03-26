@@ -17,8 +17,8 @@ routerJson.get('/downloadjson', async (req, res) => {
     const place = fns[1].replace('.json', '');
     const acceptfile = req.get('accept');
     const routepath = `informes/informesJSON/${place}`;
-
-    if (!fileName || !acceptfile.includes('application/json') || !fileName.includes('informe') || fileName.length > 27) {
+//rev
+    if (!fileName || !acceptfile.includes('application/json') || !fileName.includes('informe') || fileName.length > 57) {
       res.status(400).json('Nombre de archivo erróneo');
       return;
     }

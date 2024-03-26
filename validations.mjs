@@ -7,7 +7,7 @@ export function reportValidation(data) {
  
         //añadir  resto de campos una vez definidos 
         const metadataSchema = z.object({
-            fileID: z.string().length(27),
+            // fileID: z.string().length(27),
             tittle: z.string().includes("Cambio de Turno").length(15)
         });
 

@@ -1,0 +1,81 @@
+[
+  {
+    "metaData": {
+      "fileID": "informe-unit1-25-03-24.json",
+      "tittle": "Cambio de Turno",
+      "place": "🏭 Termosol1",
+      "DayNight": "Noche",
+      "isComplete": false,
+      "lastEdit": "26/3/2024, 0:42:09"
+    }
+  },
+  {
+    "handshake": {
+      "party": [
+        {
+          "type": "Turno Entrante",
+          "leader": "Jefe entrante",
+          "number": "1"
+        },
+        {
+          "type": "Turno Saliente",
+          "leader": "Jefe saliente",
+          "number": "2"
+        }
+      ]
+    }
+  },
+  {
+    "areas": [
+      {
+        "areaName": "Seguridad",
+        "units": "Estado",
+        "urlImages": [
+          "http://localhost:3001//public/images/1707175581410_Captura de pantalla 2023-04-25 135230.png",
+          "http://localhost:3001//public/images/1707175750651_Captura de pantalla 2023-04-25 165817.png"
+        ],
+        "urlVideos": [
+          "http://localhost:3001//public/video/1707057549449_Test.py - Visual Studio Code 2023-04-28 17-24-26.mp4",
+          "http://localhost:3001//public/video/1707176670192_Test.py - Visual Studio Code 2023-04-28 17-11-32.mp4"
+        ],
+        "areaItems": [
+          {
+            "desc": "Eventos de seguridad reportados dentro del turno",
+            "state": [
+              true
+            ],
+            "comments": "t1 prueba 25 marzo"
+          },
+          {
+            "desc": "Nuevos descargos abiertos o cerrados",
+            "state": [
+              true
+            ],
+            "comments": "prueba reserva"
+          },
+          {
+            "desc": "Alarmas del Sistema PCI/ incidencias camión bomberos",
+            "state": [
+              true
+            ],
+            "comments": "guardar json"
+          },
+          {
+            "desc": "Cumplido Objetivo de SWO's planificadas para el turno",
+            "state": [
+              true
+            ],
+            "comments": "imprimir pdf\nasdfsdf\nadf\nadsf"
+          },
+          {
+            "desc": "Comentario de seguridad del día (DJP de trabajos del día, Yellow, Red, Blue o Green bulletins)",
+            "state": [
+              true
+            ],
+            "comments": "prueba middlewares"
+          }
+        ]
+      }
+    ]
+  }
+]
