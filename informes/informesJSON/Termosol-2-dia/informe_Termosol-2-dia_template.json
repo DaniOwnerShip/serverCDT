@@ -1,0 +1,194 @@
+[
+  {
+    "metaData": {
+      "fileID": "template",
+      "tittle": "Log TMO2",
+      "place": "🏭 Termosol 2",
+      "DayNight": "Día",
+      "dayDate": "27-03-24",
+      "lastEdit": "27/3/2024, 19:56:32",
+      "isComplete": false,
+      "checksum": ""
+    }
+  },
+  {
+    "handshake": {
+      "party": [
+        {
+          "type": "Operador Panel",
+          "leader": "Operador",
+          "number": ""
+        },
+        {
+          "type": "Operador Bloque",
+          "leader": "Operador",
+          "number": ""
+        }
+      ]
+    }
+  },
+  {
+    "areas": [
+      {
+        "areaName": "Seguridad",
+        "units": "Estado",
+        "urlImages": [],
+        "urlVideos": [],
+        "urlAudios": [],
+        "areaItems": [
+          {
+            "desc": "Descargos principales en planta (nuevos o finalizados). Aspectos relevantes de la reunión inicial de turno. SWO, NearMiss, eventos, etc., abiertos durante el turno.",
+            "state": [
+              false
+            ],
+            "comments": ""
+          }
+        ]
+      },
+      {
+        "areaName": "Medio Ambiente",
+        "units": "Estado",
+        "urlImages": [],
+        "urlVideos": [],
+        "urlAudios": [],
+        "areaItems": [
+          {
+            "desc": "Anomalías como vertido de HTF, químico, etc., contramedidas adoptadas, si se ha solucionado o debe seguir el turno entrante, etc. Compuertas de campo solar (han de estar cerradas), si están abiertas indicar el motivo.",
+            "state": [
+              false
+            ],
+            "comments": ""
+          }
+        ]
+      },
+      {
+        "areaName": "Equipos fuera de servicio",
+        "units": "Estado",
+        "urlImages": [],
+        "urlVideos": [],
+        "urlAudios": [],
+        "areaItems": [
+          {
+            "desc": "Equipos críticos que quedan fuera de servicio o que han sido recuperados. Si el equipo ha sufrido avería, indicar la Orden de trabajo en Máximo asociada. Indicar las variaciones en el estado de cada sistema, bombas averiadas o desmontadas, señales forzadas, valores fuera de rango, etc y trabajos realizados durante el turno en cada sistema.",
+            "state": [
+              false
+            ],
+            "comments": ""
+          }
+        ]
+      },
+      {
+        "areaName": "Plan de operación",
+        "units": "Estado",
+        "urlImages": [],
+        "urlVideos": [],
+        "urlAudios": [],
+        "areaItems": [
+          {
+            "desc": "Hora de sincronización, parada, y alcance de máxima carga. Hora de arranque y paro de sales. Desviaciones respecto al POD (Operación). Operaciones incorrectas, indicando motivos y acciones correctoras. Lazos fuera de servicio, fallos intempestivos por comunicaciones, enconders, congelaciones, gradientes, etc., previsión y cumplimiento de lavado de espejos.",
+            "state": [
+              false
+            ],
+            "comments": ""
+          }
+        ]
+      },
+      {
+        "areaName": "Química del Agua/Vapor",
+        "units": "Estado",
+        "urlImages": [],
+        "urlVideos": [],
+        "urlAudios": [],
+        "areaItems": [
+          {
+            "desc": "Parámetros fuera de límites. En caso de valores fuera de rango, especificar acción correctora en curso.",
+            "state": [
+              false
+            ],
+            "comments": ""
+          }
+        ]
+      },
+      {
+        "areaName": "TOI/TMOD",
+        "units": "Estado",
+        "urlImages": [],
+        "urlVideos": [],
+        "urlAudios": [],
+        "areaItems": [
+          {
+            "desc": "Número de TOI/TMOD que se han abierto o cerrado en el turno con números de referencia. Indicar brevemente el motivo de la apertura o del cierre. Si no se puede ejecutar, indicar la NO ejecución de TOI/TMOD previsto para el turno y los motivos.",
+            "state": [
+              false
+            ],
+            "comments": ""
+          }
+        ]
+      },
+      {
+        "areaName": "Ruta de inspección",
+        "units": "Estado",
+        "urlImages": [],
+        "urlVideos": [],
+        "urlAudios": [],
+        "areaItems": [
+          {
+            "desc": "Resumen de las tareas UNSAT con las contramedidas adoptadas (definir por ruta (DCS, PB, SF, etc.)).",
+            "state": [
+              false
+            ],
+            "comments": ""
+          }
+        ]
+      },
+      {
+        "areaName": "Tareas Rutinarias",
+        "units": "Estado",
+        "urlImages": [],
+        "urlVideos": [],
+        "urlAudios": [],
+        "areaItems": [
+          {
+            "desc": "Indicar la NO realización de las tareas rutinarias asignadas y los motivos, así como incidencias detectadas.",
+            "state": [
+              false
+            ],
+            "comments": ""
+          }
+        ]
+      },
+      {
+        "areaName": "Suministros",
+        "units": "Estado",
+        "urlImages": [],
+        "urlVideos": [],
+        "urlAudios": [],
+        "areaItems": [
+          {
+            "desc": "Entregas previstas en planta (GNL, nitrógeno, químicos, materiales/equipos) que requieran soporte de técnicos para su carga/descarga y/o habilitación de espacios, etc.",
+            "state": [
+              false
+            ],
+            "comments": ""
+          }
+        ]
+      },
+      {
+        "areaName": "Cambio de turno",
+        "units": "Estado",
+        "urlImages": [],
+        "urlVideos": [],
+        "urlAudios": [],
+        "areaItems": [
+          {
+            "desc": "Asuntos pendientes del turno saliente que puedan afectar o requieran intervención del turno entrante. (descargos pendientes, acciones correctoras de química, retirada de consumibles, herramientas, limpieza, trabajos en curso que requieran continuación, consignas de operación, etc.",
+            "state": [
+              false
+            ],
+            "comments": ""
+          }
+        ]
+      }
+    ]
+  }
+]

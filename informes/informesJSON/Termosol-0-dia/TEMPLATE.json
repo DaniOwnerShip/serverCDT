@@ -1,0 +1,324 @@
+[
+  {
+    "metaData": {
+      "fileID": "template",
+      "tittle": "Cambio de Turno",
+      "place": "🏛️ Termosol",
+      "DayNight": "Día",
+      "dayDate": "25-03-24",
+      "lastEdit": "29/3/2024, 11:15:10",
+      "isComplete": false,
+      "checksum": ""
+    }
+  },
+  {
+    "handshake": {
+      "party": [
+        {
+          "type": "Turno Entrante",
+          "leader": "Jefe entrante",
+          "number": "1"
+        },
+        {
+          "type": "Turno Saliente",
+          "leader": "Jefe saliente",
+          "number": "2"
+        }
+      ]
+    }
+  },
+  {
+    "areas": [
+      {
+        "areaName": "Seguridad",
+        "units": "Estado",
+        "urlImages": [],
+        "urlVideos": [],
+        "urlAudios": [],
+        "areaItems": [
+          {
+            "desc": "Eventos de seguridad reportados dentro del turno",
+            "state": [
+              false
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "Nuevos descargos abiertos o cerrados",
+            "state": [
+              false
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "Alarmas del Sistema PCI/ incidencias camión bomberos",
+            "state": [
+              false
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "Cumplido Objetivo de SWO's planificadas para el turno",
+            "state": [
+              false
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "Comentario de seguridad del día (DJP de trabajos del día, Yellow, Red, Blue o Green bulletins)",
+            "state": [
+              false
+            ],
+            "comments": ""
+          }
+        ]
+      },
+      {
+        "areaName": "Medio Ambiente",
+        "units": "Estado",
+        "urlImages": [],
+        "urlVideos": [],
+        "urlAudios": [],
+        "areaItems": [
+          {
+            "desc": "Eventos medioambientales reportados en el turno y comunicados. Fucas y/o derrames de aceite o químicos menores",
+            "state": [
+              false
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "Riesgos medioambientales destacados en turno",
+            "state": [
+              false
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "Contramedidas ejecutadas para evitar agravar el vertido",
+            "state": [
+              false
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "Durante el truno se han activado alarmas de Benceno y se ha reportado por email las contramedidas tomadas",
+            "state": [
+              false
+            ],
+            "comments": ""
+          }
+        ]
+      },
+      {
+        "areaName": "Producción",
+        "units": "PTE1 | PTE2",
+        "urlImages": [],
+        "urlVideos": [],
+        "urlAudios": [],
+        "areaItems": [
+          {
+            "desc": "Logs Máximo creados en el turno. Reporte por excepción",
+            "state": [
+              false,
+              false
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "Desviaciones de operación durante el turno y reportado en POD",
+            "state": [
+              false,
+              false
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "EFOR Off-Spect abiertos en el turno",
+            "state": [
+              false,
+              false
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "Nuevos TOI/TMOD's creados o return to normal",
+            "state": [
+              false,
+              false
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "Equipos forzados incluidos en TOI's / TMOD",
+            "state": [
+              false,
+              false
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "IOW UNSAT: comentado en cambio de turno y reporte en LOG",
+            "state": [
+              false,
+              false
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "Programación / ajuste mercado enviado",
+            "state": [
+              false,
+              false
+            ],
+            "comments": ""
+          }
+        ]
+      },
+      {
+        "areaName": "Operación / Equipos fuera de servicio",
+        "units": "PTE1 | PTE2",
+        "urlImages": [],
+        "urlVideos": [],
+        "urlAudios": [],
+        "areaItems": [
+          {
+            "desc": "PTA y PTE",
+            "state": [
+              false,
+              false
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "Dosificación Química y Muestreo",
+            "state": [
+              false,
+              false
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "Campo Solar",
+            "state": [
+              false,
+              false
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "Sistema de HTF / SALES",
+            "state": [
+              false,
+              false
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "BOP",
+            "state": [
+              false,
+              false
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "Ed. Administración / Infraestructuras Comunes/ Captación",
+            "state": [
+              false,
+              false
+            ],
+            "comments": ""
+          }
+        ]
+      },
+      {
+        "areaName": "DAILY WORK MANAGEMENT",
+        "units": "PTE1 | PTE2",
+        "urlImages": [],
+        "urlVideos": [],
+        "urlAudios": [],
+        "areaItems": [
+          {
+            "desc": "WO y PM planificados y NO realizados reportados en LOGs producción",
+            "state": [
+              false 
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "Trabajos NO planificados que se han priorizado en el turno",
+            "state": [
+              false 
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "Nuevas WO abiertas durante el turno. Revisadas y aprobadas",
+            "state": [
+              false 
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "WO y PM's en curso que requieren seguimiento del turno entrante (muy importante rellenar con detalle esta tarea si es el último día de ciclo)",
+            "state": [
+              false 
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "Tareas que queden pendientes en el cambio de turno y NO tengan una OT/WO asociada, se deberá hacer lo siguiente: evaluación e indicación del riesgo, indicar si aplica o NO PTW/ Daily Job Plan y si aplica o no recurso preventivo",
+            "state": [
+              false 
+            ],
+            "comments": ""
+          }
+        ]
+      },
+      {
+        "areaName": "TAREAS ADMINISTRATIVAS",
+        "units": "PTE1 | PTE2",
+        "urlImages": [],
+        "urlVideos": [],
+        "urlAudios": [],
+        "areaItems": [
+          {
+            "desc": "Personal de Contratas en planta",
+            "state": [
+              false
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "Alertas meteorológicas por Barro / Lluvia  / Viento",
+            "state": [
+              false
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "Suministros o envíos recepcionados durante el turno (Químicos, Gas, N2, Gasoil…)",
+            "state": [
+              false
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "Se ha revisado el estado del taller Mecánico y de Instrumentación",
+            "state": [
+              false
+            ],
+            "comments": ""
+          },
+          {
+            "desc": "Se ha revisado el estado de zona Consumibles",
+            "state": [
+              false
+            ],
+            "comments": ""
+          }
+        ]
+      }
+    ]
+  }]

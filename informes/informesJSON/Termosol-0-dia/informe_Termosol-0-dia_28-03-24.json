@@ -7,8 +7,8 @@
       "DayNight": "Día",
       "dayDate": "28-03-24",
       "lastEdit": "29/3/2024, 0:07:44",
-      "isComplete": true,
-      "checksum": "6246cbc1d4efec6b45cd1f61ae1abf6ac02a72efe2dc5e4c70af50ae20d0b42d"
+      "isComplete": false,
+      "checksum": ""
     }
   },
   {
@@ -24,8 +24,7 @@
           "leader": "Jefe saliente",
           "number": "2"
         }
-      ],
-      "fileID": "informe-main1-21-03-24.json"
+      ]
     }
   },
   {

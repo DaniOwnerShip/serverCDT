@@ -1,11 +1,11 @@
 [
   {
     "metaData": {
-      "fileID": "template",
+      "fileID": "informe_Termosol-0-dia_29-03-24.json",
       "tittle": "Cambio de Turno",
       "place": "🏛️ Termosol",
       "DayNight": "Día",
-      "dayDate": "28-03-24",
+      "dayDate": "29-03-24",
       "lastEdit": "29/3/2024, 11:15:10",
       "isComplete": false,
       "checksum": ""
@@ -32,7 +32,9 @@
       {
         "areaName": "Seguridad",
         "units": "Estado",
-        "urlImages": [],
+        "urlImages": [
+          "http://localhost:3001/public/image/1711709041457_soplante.jpg"
+        ],
         "urlVideos": [],
         "urlAudios": [],
         "areaItems": [
