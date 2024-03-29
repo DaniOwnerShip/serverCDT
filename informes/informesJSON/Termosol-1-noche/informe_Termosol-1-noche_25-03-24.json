@@ -1,12 +1,14 @@
 [
   {
     "metaData": {
-      "fileID": "informe-unit1-21-03-24.json",
-      "tittle": "Cambio de Turno",
-      "place": "🏭 Termosol1",
-      "DayNight": "Día",
-      "isComplete": true,
-      "lastEdit": "fromServer"
+      "fileID": "informe-unit1-25-03-24.json",
+      "tittle": "Log TMO1",
+      "place": "🏭 Termosol 1",
+      "DayNight": "Noche",
+      "dayDate": "26-03-24", 
+      "lastEdit": "26/3/2024, 0:42:09",
+      "isComplete": false,
+      "checksum": ""
     }
   },
   {
@@ -44,7 +46,7 @@
             "state": [
               true
             ],
-            "comments": "t1 prueba 21 marzo"
+            "comments": "t1 prueba 25 marzo"
           },
           {
             "desc": "Nuevos descargos abiertos o cerrados",

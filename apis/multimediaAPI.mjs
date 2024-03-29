@@ -95,10 +95,15 @@ routerMultimedia.post('/mediaupload', (req, res) => {
 
   const mediaName = sanitize(mediaFile.name);
   const mediaId = Date.now() + '_' + mediaName;
+  const spot = docFileName.split('_')[1];
+    console.log("mediaName", spot);
+
+    const _path = `informes/informesJSON/${spot}`
 
   const pathRoot = process.cwd();
-  const pathFile = path.join(pathRoot, 'informes/informesJSON/main1', docFileName);
-  const pathFileLast = path.join(pathRoot, 'informes/informesJSON/main1/informe-main1-last.json');
+  const pathFile = path.join(pathRoot, _path, docFileName);
+  console.log("pathFilepathFilepathFile", pathFile);
+  // const pathFileLast = path.join(pathRoot, 'informes/informesJSON/main1/informe-main1-last.json');
 
   try {
 
@@ -146,7 +151,7 @@ routerMultimedia.post('/mediaupload', (req, res) => {
     mediaDocURLsStack.push(mediaURL);
 
     fs.writeFileSync(pathFile, JSON.stringify(docObj, null, 2), 'utf-8');
-    fs.writeFileSync(pathFileLast, JSON.stringify(docObj, null, 2), 'utf-8');
+    // fs.writeFileSync(pathFileLast, JSON.stringify(docObj, null, 2), 'utf-8');
 
     res.status(200).json({ mediaURL: mediaURL });
 
@@ -173,9 +178,13 @@ routerMultimedia.get('/mediadelete', async (req, res) => {
   console.log("areaIndex", areaIndex);
   console.log("mediaURL", mediaURL);
 
+  const spot = docFileName.split('_')[1];
+    console.log("mediaName", spot);
+
+    const _path = `informes/informesJSON/${spot}`
   const pathRoot = process.cwd();
-  const pathFile = path.join(pathRoot, 'informes/informesJSON/main1', docFileName);
-  const pathFileLast = path.join(pathRoot, 'informes/informesJSON/main1/informe-main1-last.json');
+  const pathFile = path.join(pathRoot, _path, docFileName);
+  // const pathFileLast = path.join(pathRoot, 'informes/informesJSON/main1/informe-main1-last.json');
 
   try {
 
@@ -215,7 +224,7 @@ routerMultimedia.get('/mediadelete', async (req, res) => {
 
     mediaDocURLsStack.splice(stackIndex, 1);
     fs.writeFileSync(pathFile, JSON.stringify(docObj, null, 2), 'utf-8');
-    fs.writeFileSync(pathFileLast, JSON.stringify(docObj, null, 2), 'utf-8');  
+    // fs.writeFileSync(pathFileLast, JSON.stringify(docObj, null, 2), 'utf-8');  
 
     const url = new URL(mediaURL);
     const decodePath = decodeURIComponent(url.pathname);

@@ -1,11 +1,12 @@
 [
   {
     "metaData": {
-      "fileID": "informe-main1-25-03-24.json",
+      "fileID": "informe_Termosol-0-dia_27-03-24.json",
       "tittle": "Cambio de Turno",
       "place": "🏛️ Termosol",
-      "DayNight": "Noche",
-      "lastEdit": "26/3/2024, 0:05:09",
+      "DayNight": "Día",
+      "dayDate": "27-03-24",
+      "lastEdit": "27/3/2024, 16:41:35",
       "isComplete": false,
       "checksum": ""
     }

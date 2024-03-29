@@ -5,20 +5,20 @@ export function reportValidation(data) {
  
     try {
  
-        //añadir  resto de campos una vez definidos 
-        const metadataSchema = z.object({
-            // fileID: z.string().length(27),
-            tittle: z.string().includes("Cambio de Turno").length(15)
-        });
+        // //añadir  resto de campos una vez definidos 
+        // const metadataSchema = z.object({
+        //     // fileID: z.string().length(27),
+        //     tittle: z.string().includes("Cambio de Turno").length(15)
+        // });
 
-        metadataSchema.parse(data[0].metaData);
+        // metadataSchema.parse(data[0].metaData);
 
         const handshakeSchema = z.object({  
             party: z.array(
                 z.object({
                     type: z.string(),
                     leader: z.string(),
-                    number: z.string().min(1).max(9).length(1),
+                    // number: z.string().min(1).max(9).length(1),
                 })
             ),
         });

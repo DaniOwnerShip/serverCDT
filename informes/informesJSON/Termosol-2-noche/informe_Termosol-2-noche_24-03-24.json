@@ -2,11 +2,13 @@
   {
     "metaData": {
       "fileID": "informe-unit2-24-03-24.json",
-      "tittle": "Cambio de Turno",
-      "place": "🏭 Termosol2",
+      "tittle": "Log TMO2",
+      "place": "🏭 Termosol 2",
       "DayNight": "Noche",
+      "dayDate": "26-03-24", 
+      "lastEdit": "24/3/2024, 19:23:50",
       "isComplete": false,
-      "lastEdit": "24/3/2024, 19:23:50"
+      "checksum": ""
     }
   },
   {

@@ -1,12 +1,14 @@
 [
   {
     "metaData": {
-      "fileID": "informe-unit2-21-03-24.json",
-      "tittle": "Cambio de Turno",
-      "place": "🏭 Termosol2",
+      "fileID": "informe-unit2-24-03-24.json",
+      "tittle": "Log TMO2",
+      "place": "🏭 Termosol 2",
       "DayNight": "Día",
-      "isComplete": true,
-      "lastEdit": "fromServer"
+      "dayDate": "26-03-24", 
+      "lastEdit": "24/3/2024, 19:23:50",
+      "isComplete": false,
+      "checksum": ""
     }
   },
   {
@@ -423,15 +425,15 @@
             "desc": "Programación / ajuste mercado enviado",
             "state": [
               true,
-              true
+              false
             ],
             "comments": "comentarios"
           },
           {
             "desc": "Datos en GADS",
             "state": [
-              true,
-              true
+              false,
+              false
             ],
             "comments": "comentarios"
           }

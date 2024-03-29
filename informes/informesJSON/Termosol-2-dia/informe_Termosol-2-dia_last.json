@@ -1,12 +1,14 @@
 [
   {
     "metaData": {
-      "fileID": "informe-unit2-21-03-24.json",
-      "tittle": "Cambio de Turno",
-      "place": "🏭 Termosol2",
+      "fileID": "informe_Termosol-2-dia_27-03-24.json",
+      "tittle": "Log TMO2",
+      "place": "🏭 Termosol 2",
       "DayNight": "Día",
-      "isComplete": true,
-      "lastEdit": "fromServer"
+      "dayDate": "27-03-24",
+      "lastEdit": "27/3/2024, 19:46:29",
+      "isComplete": false,
+      "checksum": ""
     }
   },
   {
@@ -49,9 +51,9 @@
           {
             "desc": "Nuevos descargos abiertos o cerrados",
             "state": [
-              true
+              false
             ],
-            "comments": "prueba reserva"
+            "comments": "prueba reservasdsds"
           },
           {
             "desc": "Alarmas del Sistema PCI/ incidencias camión bomberos",
@@ -423,15 +425,15 @@
             "desc": "Programación / ajuste mercado enviado",
             "state": [
               true,
-              true
+              false
             ],
             "comments": "comentarios"
           },
           {
             "desc": "Datos en GADS",
             "state": [
-              true,
-              true
+              false,
+              false
             ],
             "comments": "comentarios"
           }

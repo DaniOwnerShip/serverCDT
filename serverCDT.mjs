@@ -35,7 +35,7 @@ app.prepare().then(() => {
 
   serverExpress.use(function (req, res, next) { 
     // res.setHeader('Access-Control-Allow-Headers', 'ETag, pruebax'); 
-    res.setHeader('Access-Control-Expose-Headers', 'ETag, pruebax');    
+    res.setHeader('Access-Control-Expose-Headers', 'ETag, X-File-Type');    
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     // res.setHeader('pruebax', '12345'); 
     next();
