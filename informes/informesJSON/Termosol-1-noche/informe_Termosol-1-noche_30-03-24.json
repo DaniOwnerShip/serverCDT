@@ -1,14 +1,14 @@
 [
   {
     "metaData": {
-      "fileID": "template",
-      "tittle": "Log TMO2",
-      "place": "🏭 Termosol 2",
-      "DayNight": "Nohe",
-      "dayDate": "27-03-24",
-      "lastEdit": "30/3/2024, 14:59:34",
-      "isComplete": false,
-      "checksum": ""
+      "fileID": "informe_Termosol-1-noche_30-03-24.json",
+      "tittle": "Log TMO1",
+      "place": "🏭 Termosol 1",
+      "DayNight": "Noche",
+      "dayDate": "30-03-24",
+      "lastEdit": "30/3/2024, 14:55:09",
+      "isComplete": true,
+      "checksum": "5c22c68715236f3c6e87a5b821d6aebb525140acf1f028c63d1619897f5195a9"
     }
   },
   {
@@ -41,7 +41,7 @@
             "state": [
               true
             ],
-            "comments": "prueba 3 marzo T2 noche"
+            "comments": "prueba TMO1 noche"
           }
         ]
       },
@@ -57,7 +57,7 @@
             "state": [
               true
             ],
-            "comments": "prueba firma"
+            "comments": "completado?"
           }
         ]
       },

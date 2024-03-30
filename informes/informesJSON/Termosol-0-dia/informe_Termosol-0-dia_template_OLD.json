@@ -1,12 +1,12 @@
 [
   {
     "metaData": {
-      "fileID": "informe_Termosol-0-dia_27-03-24.json",
+      "fileID": "template",
       "tittle": "Cambio de Turno",
       "place": "🏛️ Termosol",
       "DayNight": "Día",
-      "dayDate": "27-03-24",
-      "lastEdit": "29/3/2024, 0:46:02",
+      "dayDate": "template",
+      "lastEdit": "30/3/2024, 16:32:39",
       "isComplete": false,
       "checksum": ""
     }
@@ -24,8 +24,7 @@
           "leader": "Jefe saliente",
           "number": "2"
         }
-      ],
-      "fileID": "informe-main1-21-03-24.json"
+      ]
     }
   },
   {
@@ -42,14 +41,14 @@
             "state": [
               true
             ],
-            "comments": "informe 25 de marzo\n"
+            "comments": "informe 29 de marzo\n"
           },
           {
             "desc": "Nuevos descargos abiertos o cerrados",
             "state": [
               true
             ],
-            "comments": "prueba reserva"
+            "comments": "prueba disgregación."
           },
           {
             "desc": "Alarmas del Sistema PCI/ incidencias camión bomberos",
@@ -61,14 +60,14 @@
           {
             "desc": "Cumplido Objetivo de SWO's planificadas para el turno",
             "state": [
-              false
+              true
             ],
             "comments": "imprimir pdf\nasdfsdf\nadf\nadsf"
           },
           {
             "desc": "Comentario de seguridad del día (DJP de trabajos del día, Yellow, Red, Blue o Green bulletins)",
             "state": [
-              false
+              true
             ],
             "comments": "prueba middlewares"
           }

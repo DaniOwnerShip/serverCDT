@@ -12,16 +12,9 @@ routerJson.get('/downloadjson', async (req, res) => {
 
   try {
 
-
     const { fileName } = req.query;
-
     console.log('downloadjson', fileName);
-
-     
     const spot = fileName.split('_')[1];
-    // const spot = fns[1].replace('.json', '');
-    console.log('spot', spot);
-
     const routepath = `informes/informesJSON/${spot}`;
 
     console.log('spot', spot);
@@ -29,45 +22,28 @@ routerJson.get('/downloadjson', async (req, res) => {
 
 
     const acceptfile = req.get('accept');
-//rev
+    //rev
     if (!fileName || !acceptfile.includes('application/json') || !fileName.includes('informe') || fileName.length > 57) {
       res.status(400).json('Nombre de archivo erróneo');
       return;
     }
 
 
-// Ruta del archivo que deseas leer
-  const filePath = path.join(process.cwd(), routepath, fileName); 
+    const filePath = path.join(process.cwd(), routepath, fileName);
 
-// Verificar si el archivo existe
-if (fs.existsSync(filePath)) {
-    // Si el archivo existe, lo leemos
-    const fileContent = fs.readFileSync(filePath, 'utf8');
-    // const doc = fs.readFileSync(pathFile, 'utf-8');
-    console.log('Contenido del archivo:' );
-    res.set('X-File-Type', 'actual');
-    res.status(200).json(JSON.parse(fileContent));
-} else {
-    const docTemplate = `informe_${spot}_template.json`; 
-  const _filePath = path.join(process.cwd(), routepath, docTemplate); 
-  const fileContent = fs.readFileSync(_filePath, 'utf8'); 
-    // Si el archivo no existe, enviamos una plantilla 
-    res.set('X-File-Type', 'Plantilla hidratada');
-    // const plantilla = 'Este es un archivo de plantilla.';
-    // const fileContent = fs.readFileSync(filePath, 'utf8');
-    res.status(200).json(JSON.parse(fileContent));
-    console.log('El archivo no existe. Enviando plantilla:', docTemplate);
-}
+    if (fs.existsSync(filePath)) {
+      const fileContent = fs.readFileSync(filePath, 'utf8');
+      res.set('X-File-Type', 'actual');
+      res.status(200).json(JSON.parse(fileContent));
+    } else {
+      const docTemplate = `informe_${spot}_template.json`;
+      const _filePath = path.join(process.cwd(), routepath, docTemplate);
+      const fileContent = fs.readFileSync(_filePath, 'utf8');
+      res.set('X-File-Type', 'Plantilla hidratada');
+      res.status(200).json(JSON.parse(fileContent)); 
+    }
+    console.log('download file', fileName);
 
-
-// return res.status(400).json('e.messageccc'); 
-
-    // const pathFile = path.join(process.cwd(), routepath, fileName); 
-    // const doc = fs.readFileSync(pathFile, 'utf-8');
-
-    // res.status(200).json(JSON.parse(doc));
-
-    // console.log('downloadjson', fileName);
 
   }
   catch (e) {
@@ -82,8 +58,8 @@ if (fs.existsSync(filePath)) {
 
 routerJson.post('/saveJson', async (req, res) => {
 
-  console.log("saveJson" );
-  const report = req.body; 
+  console.log("saveJson");
+  const report = req.body;
 
   const validation = reportValidation(report);
   if (typeof (validation) === 'object' && validation !== null) {
@@ -92,10 +68,10 @@ routerJson.post('/saveJson', async (req, res) => {
     return res.status(400).json(msg);
   } else if (validation === null || validation !== 1) {
     return res.status(500).json(`Error desconocido durante la validación`);
-  } 
-  
-  const _date = new Date().toLocaleString(); 
-  report[0].metaData.lastEdit = _date; 
+  }
+
+  const _date = new Date().toLocaleString();
+  report[0].metaData.lastEdit = _date;
 
   if (report[0].metaData.isComplete) {
     console.log('isComplete');
@@ -117,27 +93,27 @@ routerJson.post('/saveJson', async (req, res) => {
     const templatePath = path.join(process.cwd(), routepath, `/informe_${spot}_template.json`);
     const templateFile = fs.readFileSync(templatePath, 'utf-8');
     const templateObj = JSON.parse(templateFile); //templateObj[2].areas =
-    templateObj[0].metaData.lastEdit = _date; 
-    const teplateAreas = report[2].areas; 
+    templateObj[0].metaData.lastEdit = _date;
+    const teplateAreas = report[2].areas;
     teplateAreas.forEach(area => {
-      area.urlImages = [];  
-      area.urlVideos = [];  
-      area.urlAudios = [];   
+      area.urlImages = [];
+      area.urlVideos = [];
+      area.urlAudios = [];
     });
     templateObj[2].areas = teplateAreas;
-    
+
     fs.writeFileSync(templatePath, JSON.stringify(templateObj, null, 2), 'utf-8');
 
     // return res.sendStatus(400);
     // const fileToSave =  
 
-    const reportPath = path.join(process.cwd(), routepath, fileName); 
+    const reportPath = path.join(process.cwd(), routepath, fileName);
 
     fs.writeFileSync(reportPath, JSON.stringify(report, null, 2), 'utf-8');
     // fs.writeFileSync(templatePath, JSON.stringify(report, null, 2), 'utf-8');
 
-    res.status(200).json(`Archivo guardado: ${fileName}`); 
-    console.log('saveJson', fileName); 
+    res.status(200).json(`Archivo guardado: ${fileName}`);
+    console.log('saveJson', fileName);
   }
 
   catch (e) {

@@ -1,12 +1,12 @@
 [
   {
     "metaData": {
-      "fileID": "template",
-      "tittle": "Log TMO2",
-      "place": "🏭 Termosol 2",
-      "DayNight": "Nohe",
+      "fileID": "informe_Termosol-1-dia_27-03-24.json",
+      "tittle": "Log TMO1",
+      "place": "🏭 Termosol 1",
+      "DayNight": "Noche",
       "dayDate": "27-03-24",
-      "lastEdit": "30/3/2024, 14:59:34",
+      "lastEdit": "27/3/2024, 19:56:32",
       "isComplete": false,
       "checksum": ""
     }
@@ -39,9 +39,9 @@
           {
             "desc": "Descargos principales en planta (nuevos o finalizados). Aspectos relevantes de la reunión inicial de turno. SWO, NearMiss, eventos, etc., abiertos durante el turno.",
             "state": [
-              true
+              false
             ],
-            "comments": "prueba 3 marzo T2 noche"
+            "comments": ""
           }
         ]
       },
@@ -55,9 +55,9 @@
           {
             "desc": "Anomalías como vertido de HTF, químico, etc., contramedidas adoptadas, si se ha solucionado o debe seguir el turno entrante, etc. Compuertas de campo solar (han de estar cerradas), si están abiertas indicar el motivo.",
             "state": [
-              true
+              false
             ],
-            "comments": "prueba firma"
+            "comments": ""
           }
         ]
       },

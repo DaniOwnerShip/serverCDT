@@ -1,28 +1,28 @@
 [
-    {
-      "metaData": {
-        "fileID": "template",
-        "tittle": "Log TMO1",
-        "place": "🏭 Termosol 1",
-        "DayNight": "Día",
-        "dayDate": "27-03-24",
-        "lastEdit": "27/3/2024, 19:56:32",
-        "isComplete": false,
-        "checksum": ""
-      }
+  {
+    "metaData": {
+      "fileID": "informe_Termosol-0-dia_30-03-24.json",
+      "tittle": "Cambio de Turno",
+      "place": "🏛️ Termosol",
+      "DayNight": "Día",
+      "dayDate": "30-03-24",
+      "lastEdit": "30/3/2024, 18:53:10",
+      "isComplete": true,
+      "checksum": "3510ea60e52692ce958e77ac43cc485d5b6f437def3483bab98d1611e10e2de3"
+    }
   },
   {
     "handshake": {
       "party": [
         {
-          "type": "Operador Panel",
-          "leader": "Operador",
-          "number": ""
+          "type": "Turno Entrante",
+          "leader": "Jefe entrante",
+          "number": "1"
         },
         {
-          "type": "Operador Bloque",
-          "leader": "Operador",
-          "number": ""
+          "type": "Turno Saliente",
+          "leader": "Jefe saliente",
+          "number": "2"
         }
       ]
     }
@@ -39,14 +39,14 @@
           {
             "desc": "Incidencias que afecten a la seguridad de las personas, descargos LOTO, PCI",
             "state": [
-              false
+              true
             ],
-            "comments": ""
+            "comments": "informe 30 de marzo"
           },
           {
             "desc": "Anomalías como vertidos de HTF, químico, etc... y contramedidas adoptadas",
             "state": [
-              false
+              true
             ],
             "comments": ""
           }
@@ -54,7 +54,7 @@
       },
       {
         "areaName": "Incidencias - Equipos fuera de servicio",
-        "units": "Estado",
+        "units": "PTE1 | PTE2",
         "urlImages": [],
         "urlVideos": [],
         "urlAudios": [],
@@ -62,41 +62,78 @@
           {
             "desc": "Incidencias detectadas o lista de equipos críticos que quedan fuera de servicio",
             "state": [
-              false
+              true,
+              true
             ],
-            "comments": ""
+            "comments": "comentarios sadfsadf sasdagfg ñjaid ijadfknandkf jadskjfñl \nadsfad  dfasdf\n adjfkjakdsjf dsfadsfasdfsad\nasdfasdfa adfadfasdfadfgaf\nagfagadg\nadgadg ag  "
           }
         ]
       },
       {
-        "areaName": "Registro Operaciones",
+        "areaName": "Desviaciones de operación",
         "units": "PTE1 | PTE2",
         "urlImages": [],
         "urlVideos": [],
         "urlAudios": [],
         "areaItems": [
           {
-            "desc": "Operaciones relevantes para la producción indicando hora, enfoque de CS, acople de TV, inicio carga de sales, etc.",
+            "desc": "Listado de anomalías reportadas por excepción",
             "state": [
-              false 
+              true,
+              false
             ],
-            "comments": ""
+            "comments": "comentarios"
           }
         ]
       },
       {
-        "areaName": "Química del Agua/Vapor",
+        "areaName": "Previsión de Mercado",
         "units": "PTE1 | PTE2",
         "urlImages": [],
         "urlVideos": [],
         "urlAudios": [],
         "areaItems": [
           {
-            "desc": "Parámetros químicos fuera de rango y actuaciones llevada cabo",
+            "desc": "Estado del plan de carga (arbitraje, terciaria, limitaciones...)",
             "state": [
+              true,
               false
             ],
-            "comments": ""
+            "comments": "comentarios"
+          }
+        ]
+      },
+      {
+        "areaName": "Trabajos planificados y NO realizados",
+        "units": "PTE1 | PTE2",
+        "urlImages": [],
+        "urlVideos": [],
+        "urlAudios": [],
+        "areaItems": [
+          {
+            "desc": "Detalle del estado en que quedan",
+            "state": [
+              true,
+              false
+            ],
+            "comments": "comentarios"
+          }
+        ]
+      },
+      {
+        "areaName": "Trabajos priorizados/fuera de planificación",
+        "units": "PTE1 | PTE2",
+        "urlImages": [],
+        "urlVideos": [],
+        "urlAudios": [],
+        "areaItems": [
+          {
+            "desc": "Detalle de los trabajos realizados",
+            "state": [
+              false,
+              true
+            ],
+            "comments": "comentarios"
           }
         ]
       },
@@ -110,9 +147,10 @@
           {
             "desc": "Listado por excepción de nuevos registros",
             "state": [
-              false 
+              false,
+              true
             ],
-            "comments": ""
+            "comments": "comentarios"
           }
         ]
       },
@@ -126,11 +164,13 @@
           {
             "desc": "Tareas que requieren seguimiento del turno entrante (importante rellenar con detalle esta tarea si es el último día de ciclo)",
             "state": [
-              false
+              false,
+              true
             ],
-            "comments": ""
+            "comments": "comentarios"
           }
         ]
       }
     ]
-  }]
+  }
+]

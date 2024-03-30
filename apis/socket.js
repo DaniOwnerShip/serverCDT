@@ -83,7 +83,7 @@ export default function initSocket(serverSocket) {
             docReservesStack.push({ docName: _docName, owner: user });
 
             comment.user = user.alias;
-            comment.msg = 'Reserva apectada: ' + _docName;
+            comment.msg = 'Reserva apectada: ' + _docName.split('.')[0];
 
             socket.emit('docReserveRes', {
                 succes: true,

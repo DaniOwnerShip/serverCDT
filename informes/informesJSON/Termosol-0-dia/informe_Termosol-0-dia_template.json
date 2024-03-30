@@ -5,8 +5,8 @@
       "tittle": "Cambio de Turno",
       "place": "🏛️ Termosol",
       "DayNight": "Día",
-      "dayDate": "28-03-24",
-      "lastEdit": "29/3/2024, 11:15:10",
+      "dayDate": "template",
+      "lastEdit": "30/3/2024, 18:53:10",
       "isComplete": false,
       "checksum": ""
     }
@@ -30,1083 +30,146 @@
   {
     "areas": [
       {
-        "areaName": "Seguridad",
+        "areaName": "Seguridad y Medio Ambiente",
         "units": "Estado",
         "urlImages": [],
         "urlVideos": [],
         "urlAudios": [],
         "areaItems": [
           {
-            "desc": "Eventos de seguridad reportados dentro del turno",
+            "desc": "Incidencias que afecten a la seguridad de las personas, descargos LOTO, PCI",
             "state": [
               true
             ],
-            "comments": "informe 29 de marzo\n"
+            "comments": "informe 30 de marzo"
           },
           {
-            "desc": "Nuevos descargos abiertos o cerrados",
+            "desc": "Anomalías como vertidos de HTF, químico, etc... y contramedidas adoptadas",
             "state": [
               true
             ],
-            "comments": "prueba reserva"
-          },
-          {
-            "desc": "Alarmas del Sistema PCI/ incidencias camión bomberos",
-            "state": [
-              true
-            ],
-            "comments": "guardar json"
-          },
-          {
-            "desc": "Cumplido Objetivo de SWO's planificadas para el turno",
-            "state": [
-              true
-            ],
-            "comments": "imprimir pdf\nasdfsdf\nadf\nadsf"
-          },
-          {
-            "desc": "Comentario de seguridad del día (DJP de trabajos del día, Yellow, Red, Blue o Green bulletins)",
-            "state": [
-              false
-            ],
-            "comments": "prueba middlewares"
+            "comments": ""
           }
         ]
       },
       {
-        "areaName": "Producción",
+        "areaName": "Incidencias - Equipos fuera de servicio",
         "units": "PTE1 | PTE2",
         "urlImages": [],
+        "urlVideos": [],
+        "urlAudios": [],
         "areaItems": [
           {
-            "desc": "Logs Máximo creados en el turno. Reporte por excepción",
+            "desc": "Incidencias detectadas o lista de equipos críticos que quedan fuera de servicio",
             "state": [
               true,
               true
             ],
             "comments": "comentarios sadfsadf sasdagfg ñjaid ijadfknandkf jadskjfñl \nadsfad  dfasdf\n adjfkjakdsjf dsfadsfasdfsad\nasdfasdfa adfadfasdfadfgaf\nagfagadg\nadgadg ag  "
-          },
-          {
-            "desc": "Desviaciones de operación durante el turno y reportado en POD",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "new branch"
-          },
-          {
-            "desc": "EFOR Off-Spect abiertos en el turno",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios "
-          },
-          {
-            "desc": "Nuevos TOI/TMOD's creados o return to normal",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Equipos forzados incluidos en TOI's / TMOD",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "IOW UNSAT: comentado en cambio de turno y reporte en LOG",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Programación / ajuste mercado enviado",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Datos en GADS",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
           }
-        ],
-        "urlVideos": [],
-        "urlAudios": []
+        ]
       },
       {
-        "areaName": "Producción",
+        "areaName": "Desviaciones de operación",
         "units": "PTE1 | PTE2",
         "urlImages": [],
         "urlVideos": [],
+        "urlAudios": [],
         "areaItems": [
           {
-            "desc": "Logs Máximo creados en el turno. Reporte por excepción",
+            "desc": "Listado de anomalías reportadas por excepción",
             "state": [
               true,
               false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Desviaciones de operación durante el turno y reportado en POD",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios",
-            "coments": "comentario test"
-          },
-          {
-            "desc": "EFOR Off-Spect abiertos en el turno",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Nuevos TOI/TMOD's creados o return to normal",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Equipos forzados incluidos en TOI's / TMOD",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "IOW UNSAT: comentado en cambio de turno y reporte en LOG",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Programación / ajuste mercado enviado",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Datos en GADS",
-            "state": [
-              false,
-              true
             ],
             "comments": "comentarios"
           }
-        ],
-        "urlAudios": []
+        ]
       },
       {
-        "areaName": "Producción",
+        "areaName": "Previsión de Mercado",
         "units": "PTE1 | PTE2",
         "urlImages": [],
         "urlVideos": [],
+        "urlAudios": [],
         "areaItems": [
           {
-            "desc": "Logs Máximo creados en el turno. Reporte por excepción",
+            "desc": "Estado del plan de carga (arbitraje, terciaria, limitaciones...)",
             "state": [
               true,
               false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Desviaciones de operación durante el turno y reportado en POD",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios",
-            "coments": "comentario test"
-          },
-          {
-            "desc": "EFOR Off-Spect abiertos en el turno",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Nuevos TOI/TMOD's creados o return to normal",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Equipos forzados incluidos en TOI's / TMOD",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "IOW UNSAT: comentado en cambio de turno y reporte en LOG",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Programación / ajuste mercado enviado",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Datos en GADS",
-            "state": [
-              true,
-              true
             ],
             "comments": "comentarios"
           }
-        ],
-        "urlAudios": []
+        ]
       },
       {
-        "areaName": "Producción",
+        "areaName": "Trabajos planificados y NO realizados",
         "units": "PTE1 | PTE2",
         "urlImages": [],
+        "urlVideos": [],
+        "urlAudios": [],
         "areaItems": [
           {
-            "desc": "Logs Máximo creados en el turno. Reporte por excepción",
+            "desc": "Detalle del estado en que quedan",
             "state": [
               true,
               false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Desviaciones de operación durante el turno y reportado en POD",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios",
-            "coments": "comentario test"
-          },
-          {
-            "desc": "EFOR Off-Spect abiertos en el turno",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Nuevos TOI/TMOD's creados o return to normal",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Equipos forzados incluidos en TOI's / TMOD",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "IOW UNSAT: comentado en cambio de turno y reporte en LOG",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Programación / ajuste mercado enviado",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Datos en GADS",
-            "state": [
-              false,
-              true
             ],
             "comments": "comentarios"
           }
-        ],
-        "urlVideos": [],
-        "urlAudios": []
+        ]
       },
       {
-        "areaName": "Producción",
+        "areaName": "Trabajos priorizados/fuera de planificación",
         "units": "PTE1 | PTE2",
         "urlImages": [],
+        "urlVideos": [],
+        "urlAudios": [],
         "areaItems": [
           {
-            "desc": "Logs Máximo creados en el turno. Reporte por excepción",
+            "desc": "Detalle de los trabajos realizados",
             "state": [
               false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Desviaciones de operación durante el turno y reportado en POD",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios",
-            "coments": "comentario test"
-          },
-          {
-            "desc": "EFOR Off-Spect abiertos en el turno",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Nuevos TOI/TMOD's creados o return to normal",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Equipos forzados incluidos en TOI's / TMOD",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "IOW UNSAT: comentado en cambio de turno y reporte en LOG",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Programación / ajuste mercado enviado",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Datos en GADS",
-            "state": [
-              true,
               true
             ],
             "comments": "comentarios"
           }
-        ],
-        "urlVideos": [],
-        "urlAudios": []
+        ]
       },
       {
-        "areaName": "Producción",
+        "areaName": "WOs Abiertas - TOI/TMOD - IOW",
         "units": "PTE1 | PTE2",
         "urlImages": [],
+        "urlVideos": [],
+        "urlAudios": [],
         "areaItems": [
           {
-            "desc": "Logs Máximo creados en el turno. Reporte por excepción",
+            "desc": "Listado por excepción de nuevos registros",
             "state": [
               false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Desviaciones de operación durante el turno y reportado en POD",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios",
-            "coments": "comentario test"
-          },
-          {
-            "desc": "EFOR Off-Spect abiertos en el turno",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Nuevos TOI/TMOD's creados o return to normal",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Equipos forzados incluidos en TOI's / TMOD",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "IOW UNSAT: comentado en cambio de turno y reporte en LOG",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Programación / ajuste mercado enviado",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Datos en GADS",
-            "state": [
-              true,
               true
             ],
             "comments": "comentarios"
           }
-        ],
-        "urlVideos": [],
-        "urlAudios": []
+        ]
       },
       {
-        "areaName": "Producción",
+        "areaName": "Asuntos para turno entrante",
         "units": "PTE1 | PTE2",
         "urlImages": [],
+        "urlVideos": [],
+        "urlAudios": [],
         "areaItems": [
           {
-            "desc": "Logs Máximo creados en el turno. Reporte por excepción",
+            "desc": "Tareas que requieren seguimiento del turno entrante (importante rellenar con detalle esta tarea si es el último día de ciclo)",
             "state": [
               false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Desviaciones de operación durante el turno y reportado en POD",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios",
-            "coments": "comentario test"
-          },
-          {
-            "desc": "EFOR Off-Spect abiertos en el turno",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Nuevos TOI/TMOD's creados o return to normal",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Equipos forzados incluidos en TOI's / TMOD",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "IOW UNSAT: comentado en cambio de turno y reporte en LOG",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Programación / ajuste mercado enviado",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Datos en GADS",
-            "state": [
-              true,
               true
             ],
             "comments": "comentarios"
           }
-        ],
-        "urlVideos": [],
-        "urlAudios": []
-      },
-      {
-        "areaName": "Producción",
-        "units": "PTE1 | PTE2",
-        "urlImages": [],
-        "areaItems": [
-          {
-            "desc": "Logs Máximo creados en el turno. Reporte por excepción",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Desviaciones de operación durante el turno y reportado en POD",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios",
-            "coments": "comentario test"
-          },
-          {
-            "desc": "EFOR Off-Spect abiertos en el turno",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Nuevos TOI/TMOD's creados o return to normal",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Equipos forzados incluidos en TOI's / TMOD",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "IOW UNSAT: comentado en cambio de turno y reporte en LOG",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Programación / ajuste mercado enviado",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Datos en GADS",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          }
-        ],
-        "urlVideos": [],
-        "urlAudios": []
-      },
-      {
-        "areaName": "Producción",
-        "units": "PTE1 | PTE2",
-        "urlImages": [],
-        "areaItems": [
-          {
-            "desc": "Logs Máximo creados en el turno. Reporte por excepción",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Desviaciones de operación durante el turno y reportado en POD",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios",
-            "coments": "comentario test"
-          },
-          {
-            "desc": "EFOR Off-Spect abiertos en el turno",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Nuevos TOI/TMOD's creados o return to normal",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Equipos forzados incluidos en TOI's / TMOD",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "IOW UNSAT: comentado en cambio de turno y reporte en LOG",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Programación / ajuste mercado enviado",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Datos en GADS",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          }
-        ],
-        "urlVideos": [],
-        "urlAudios": []
-      },
-      {
-        "areaName": "Producción",
-        "units": "PTE1 | PTE2",
-        "urlImages": [],
-        "areaItems": [
-          {
-            "desc": "Logs Máximo creados en el turno. Reporte por excepción",
-            "state": [
-              false,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Desviaciones de operación durante el turno y reportado en POD",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios",
-            "coments": "comentario test"
-          },
-          {
-            "desc": "EFOR Off-Spect abiertos en el turno",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Nuevos TOI/TMOD's creados o return to normal",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Equipos forzados incluidos en TOI's / TMOD",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "IOW UNSAT: comentado en cambio de turno y reporte en LOG",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Programación / ajuste mercado enviado",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Datos en GADS",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          }
-        ],
-        "urlVideos": [],
-        "urlAudios": []
-      },
-      {
-        "areaName": "Producción",
-        "units": "PTE1 | PTE2",
-        "urlImages": [],
-        "areaItems": [
-          {
-            "desc": "Logs Máximo creados en el turno. Reporte por excepción",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Desviaciones de operación durante el turno y reportado en POD",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios",
-            "coments": "comentario test"
-          },
-          {
-            "desc": "EFOR Off-Spect abiertos en el turno",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Nuevos TOI/TMOD's creados o return to normal",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Equipos forzados incluidos en TOI's / TMOD",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "IOW UNSAT: comentado en cambio de turno y reporte en LOG",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Programación / ajuste mercado enviado",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Datos en GADS",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          }
-        ],
-        "urlVideos": [],
-        "urlAudios": []
-      },
-      {
-        "areaName": "Producción",
-        "units": "PTE1 | PTE2",
-        "urlImages": [],
-        "areaItems": [
-          {
-            "desc": "Logs Máximo creados en el turno. Reporte por excepción",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Desviaciones de operación durante el turno y reportado en POD",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios",
-            "coments": "comentario test"
-          },
-          {
-            "desc": "EFOR Off-Spect abiertos en el turno",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Nuevos TOI/TMOD's creados o return to normal",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Equipos forzados incluidos en TOI's / TMOD",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "IOW UNSAT: comentado en cambio de turno y reporte en LOG",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Programación / ajuste mercado enviado",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Datos en GADS",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          }
-        ],
-        "urlVideos": [],
-        "urlAudios": []
-      },
-      {
-        "areaName": "Producción",
-        "units": "PTE1 | PTE2",
-        "urlImages": [],
-        "areaItems": [
-          {
-            "desc": "Logs Máximo creados en el turno. Reporte por excepción",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Desviaciones de operación durante el turno y reportado en POD",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios",
-            "coments": "comentario test"
-          },
-          {
-            "desc": "EFOR Off-Spect abiertos en el turno",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Nuevos TOI/TMOD's creados o return to normal",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Equipos forzados incluidos en TOI's / TMOD",
-            "state": [
-              true,
-              false
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "IOW UNSAT: comentado en cambio de turno y reporte en LOG",
-            "state": [
-              false,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Programación / ajuste mercado enviado",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Datos en GADS",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          }
-        ],
-        "urlVideos": [],
-        "urlAudios": []
-      },
-      {
-        "areaName": "Producción",
-        "units": "PTE1 | PTE2",
-        "urlImages": [],
-        "areaItems": [
-          {
-            "desc": "Logs Máximo creados en el turno. Reporte por excepción",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Desviaciones de operación durante el turno y reportado en POD",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios",
-            "coments": "comentario test"
-          },
-          {
-            "desc": "EFOR Off-Spect abiertos en el turno",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Nuevos TOI/TMOD's creados o return to normal",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Equipos forzados incluidos en TOI's / TMOD",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "IOW UNSAT: comentado en cambio de turno y reporte en LOG",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Programación / ajuste mercado enviado",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          },
-          {
-            "desc": "Datos en GADS",
-            "state": [
-              true,
-              true
-            ],
-            "comments": "comentarios"
-          }
-        ],
-        "urlVideos": [],
-        "urlAudios": []
+        ]
       }
     ]
   }
