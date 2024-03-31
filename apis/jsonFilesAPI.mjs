@@ -35,6 +35,7 @@ routerJson.get('/downloadjson', async (req, res) => {
       const fileContent = fs.readFileSync(filePath, 'utf8');
       res.set('X-File-Type', 'actual');
       res.status(200).json(JSON.parse(fileContent));
+      console.log('existsSyncexistsSync file', fileName);
     } else {
       const docTemplate = `informe_${spot}_template.json`;
       const _filePath = path.join(process.cwd(), routepath, docTemplate);
