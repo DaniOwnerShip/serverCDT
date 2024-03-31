@@ -2,7 +2,7 @@
 
 
 
-// pend. validaciones 
+// pend. validaciones /rev doc res
 
 export default function initSocket(serverSocket) {
 

@@ -46,46 +46,7 @@ const videoMimes = [
 const routerMultimedia = Router();
 
 
-routerMultimedia.post('/image', (req, res) => {
-  console.log('img');
-
-  const image = req.files.image;
-  const fileName = req.body.fileName;
-  const areaIndex = req.body.areaIndex;
-
-  if (!image || !areaIndex || !fileName || !/^image/.test(image.mimetype) || !imageMimes.includes(image.mimetype)) {
-    return res.sendStatus(400);
-  }
-
-  try {
-    const imageName = sanitize(image.name);
-    const imageId = Date.now() + '_' + imageName;
-    const urlImage = `http://localhost:3001/public/image/${imageId}`;
-    const pathRoot = process.cwd();
-    const pathImage = path.join(pathRoot, 'public/image/', imageId);
-    const pathFile = path.join(pathRoot, 'informes/informesJSON/main1/', fileName);
-    const pathFileLast = path.join(pathRoot, 'informes/informesJSON/main1/informe-main1-last.json');
-
-    image.mv(pathImage);
-
-    const doc = fs.readFileSync(pathFile, 'utf-8');
-    const docObj = JSON.parse(doc);
-    docObj[1].areas[areaIndex].urlImages.push(urlImage);
-
-    fs.writeFileSync(pathFile, JSON.stringify(docObj, null, 2), 'utf-8');
-    fs.writeFileSync(pathFileLast, JSON.stringify(docObj, null, 2), 'utf-8');
-    res.status(200).json({ urlImage: urlImage });
-    console.log('nuevo image', fileName);
-  }
-  catch (e) {
-    console.log("upload-image err", e.message);
-    return res.sendStatus(500);
-  }
-
-
-});
-
-//rev
+//rev / refact
 routerMultimedia.post('/mediaupload', (req, res) => {
 
   const mediaFile = req.files.mediaFile;
@@ -253,6 +214,45 @@ export default routerMultimedia;
 
 
 
+
+// routerMultimedia.post('/image', (req, res) => {
+//   console.log('img');
+
+//   const image = req.files.image;
+//   const fileName = req.body.fileName;
+//   const areaIndex = req.body.areaIndex;
+
+//   if (!image || !areaIndex || !fileName || !/^image/.test(image.mimetype) || !imageMimes.includes(image.mimetype)) {
+//     return res.sendStatus(400);
+//   }
+
+//   try {
+//     const imageName = sanitize(image.name);
+//     const imageId = Date.now() + '_' + imageName;
+//     const urlImage = `http://localhost:3001/public/image/${imageId}`;
+//     const pathRoot = process.cwd();
+//     const pathImage = path.join(pathRoot, 'public/image/', imageId);
+//     const pathFile = path.join(pathRoot, 'informes/informesJSON/main1/', fileName);
+//     const pathFileLast = path.join(pathRoot, 'informes/informesJSON/main1/informe-main1-last.json');
+
+//     image.mv(pathImage);
+
+//     const doc = fs.readFileSync(pathFile, 'utf-8');
+//     const docObj = JSON.parse(doc);
+//     docObj[1].areas[areaIndex].urlImages.push(urlImage);
+
+//     fs.writeFileSync(pathFile, JSON.stringify(docObj, null, 2), 'utf-8');
+//     fs.writeFileSync(pathFileLast, JSON.stringify(docObj, null, 2), 'utf-8');
+//     res.status(200).json({ urlImage: urlImage });
+//     console.log('nuevo image', fileName);
+//   }
+//   catch (e) {
+//     console.log("upload-image err", e.message);
+//     return res.sendStatus(500);
+//   }
+
+
+// });
 
 
 // routerMultimedia.get('/delete-filessss', async (req, res) => {
