@@ -1,15 +1,15 @@
 [
-    {
-      "metaData": {
-        "fileID": "template",
-        "tittle": "Log TMO1",
-        "place": "🏭 Termosol 1",
-        "DayNight": "Día",
-        "dayDate": "27-03-24",
-        "lastEdit": "27/3/2024, 19:56:32",
-        "isComplete": false,
-        "checksum": ""
-      }
+  {
+    "metaData": {
+      "fileID": "template",
+      "tittle": "Log TMO1",
+      "place": "🏭 Termosol 1",
+      "DayNight": "común",
+      "dayDate": "27-03-24",
+      "lastEdit": "1/4/2024, 2:36:23",
+      "isComplete": false,
+      "checksum": ""
+    }
   },
   {
     "handshake": {
@@ -39,14 +39,14 @@
           {
             "desc": "Incidencias que afecten a la seguridad de las personas, descargos LOTO, PCI",
             "state": [
-              false
+              true
             ],
             "comments": ""
           },
           {
             "desc": "Anomalías como vertidos de HTF, químico, etc... y contramedidas adoptadas",
             "state": [
-              false
+              true
             ],
             "comments": ""
           }
@@ -78,7 +78,7 @@
           {
             "desc": "Operaciones relevantes para la producción indicando hora, enfoque de CS, acople de TV, inicio carga de sales, etc.",
             "state": [
-              false 
+              false
             ],
             "comments": ""
           }
@@ -110,7 +110,7 @@
           {
             "desc": "Listado por excepción de nuevos registros",
             "state": [
-              false 
+              false
             ],
             "comments": ""
           }
@@ -133,4 +133,5 @@
         ]
       }
     ]
-  }]
+  }
+]

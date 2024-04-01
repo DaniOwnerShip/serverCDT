@@ -4,9 +4,9 @@
       "fileID": "template",
       "tittle": "Cambio de Turno",
       "place": "🏛️ Termosol",
-      "DayNight": "Noche",
+      "DayNight": "común",
       "dayDate": "template",
-      "lastEdit": "30/3/2024, 13:24:55",
+      "lastEdit": "1/4/2024, 2:34:50",
       "isComplete": false,
       "checksum": ""
     }
@@ -41,33 +41,33 @@
             "state": [
               true
             ],
-            "comments": ""
+            "comments": "prueba noche día 1"
           },
           {
             "desc": "Nuevos descargos abiertos o cerrados",
             "state": [
-              false
+              true
             ],
-            "comments": ""
+            "comments": "prueba 2"
           },
           {
             "desc": "Alarmas del Sistema PCI/ incidencias camión bomberos",
             "state": [
-              false
+              true
             ],
-            "comments": ""
+            "comments": "prueba 3"
           },
           {
             "desc": "Cumplido Objetivo de SWO's planificadas para el turno",
             "state": [
-              false
+              true
             ],
             "comments": ""
           },
           {
             "desc": "Comentario de seguridad del día (DJP de trabajos del día, Yellow, Red, Blue o Green bulletins)",
             "state": [
-              false
+              true
             ],
             "comments": ""
           }
